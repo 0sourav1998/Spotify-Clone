@@ -8,6 +8,7 @@ import { clerkMiddleware } from '@clerk/express'
 import { cloudinaryConfig } from "./cloudinary/config.js";
 import fileUpload from "express-fileupload";
 import adminRoute from "./routes/admin.route.js"
+import albumRoute from "./routes/album.route.js"
 
 app.use(express.json());
 
@@ -26,7 +27,9 @@ app.use(fileUpload({
 }))
 
 app.use("/api/v1/auth",authRouter);
-app.use("/api/v1/admin",adminRoute)
+app.use("/api/v1/admin",adminRoute) ;
+app.use("/api/v1/album",albumRoute) ;
+
 
 app.listen(PORT,()=>{
     console.log(`App is Listening to PORT ${PORT}`)
