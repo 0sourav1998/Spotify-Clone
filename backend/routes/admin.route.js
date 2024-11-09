@@ -1,7 +1,22 @@
 import express from "express";
 const router = express.Router();
+import { isLoggedIn, isAdmin } from "../middlewares/isAuthenticated.js";
+import {
+  checkAdmin,
+  createAlbum,
+  createSong,
+  deleteAlbum,
+  deleteSong,
+} from "../controllers/admin.controller.js";
 
+router.use(isLoggedIn, isAdmin);
 
-router.post("/createSong")
+router.get("/check-admin", checkAdmin);
 
-export default router ;
+router.post("/createSong", createSong);
+router.delete("/song/:id", deleteSong);
+
+router.post("/createAlbum", createAlbum);
+router.delete("/album/:id", deleteAlbum);
+
+export default router;
