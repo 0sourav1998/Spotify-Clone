@@ -11,33 +11,39 @@ import adminRoute from "./routes/admin.route.js"
 import albumRoute from "./routes/album.route.js"
 import statRoute from "./routes/stats.route.js"
 import songRoute from "./routes/song.route.js"
-import  userRoute from "./routes/user.route.js"
+import userRoute from "./routes/user.route.js"
+import cors from "cors"
+
+app.use(cors({
+    origin: "*",
+    credentials: true
+}));
 
 app.use(express.json());
+app.use(clerkMiddleware({
+    publishableKey: process.env.CLERK_PUBLISHABLE_KEY
+}));
 
-const PORT = process.env.PORT || 4000 ;
+const PORT = process.env.PORT || 4000;
 
 await connectToDB();
 await cloudinaryConfig();
 
-app.use(clerkMiddleware)
 app.use(fileUpload({
-    useTempFiles : true ,
-    tempFileDir : "/tmp/" ,
-    limits : {
-        fileSize : 15*1024*1024
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+    limits: {
+        fileSize: 15 * 1024 * 1024
     }
-}))
+}));
 
-app.use("/api/v1/auth",authRouter);
-app.use("/api/v1/admin",adminRoute) ;
-app.use("/api/v1/album",albumRoute) ;
-app.use("/api/v1/user",userRoute);
-app.use("/api/v1/song",songRoute);
-app.use("/api/v1/stat",statRoute)
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/admin", adminRoute);
+app.use("/api/v1/album", albumRoute);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/song", songRoute);
+app.use("/api/v1/stat", statRoute);
 
-
-
-app.listen(PORT,()=>{
-    console.log(`App is Listening to PORT ${PORT}`)
-})
+app.listen(PORT, () => {
+    console.log(`App is Listening to PORT ${PORT}`);
+});

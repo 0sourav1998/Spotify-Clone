@@ -4,8 +4,9 @@ export const authFunction = async(req,res)=>{
     const {id , firstName , lastName ,imageUrl} = req.body ;
     try {
         const existingUser = await User.findOne({clerkId : id});
+        let newUser ;
         if(!existingUser){
-            await User.create({
+            newUser = await User.create({
                 clerkId : id ,
                 name : `${firstName} ${lastName}`,
                 imageUrl : imageUrl
@@ -13,6 +14,7 @@ export const authFunction = async(req,res)=>{
         };
         return res.status(200).json({
             success : true ,
+            user : existingUser ? existingUser : newUser
         })
     } catch (error) {
         console.error(error.message)
