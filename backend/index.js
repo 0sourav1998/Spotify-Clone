@@ -9,6 +9,9 @@ import { cloudinaryConfig } from "./cloudinary/config.js";
 import fileUpload from "express-fileupload";
 import adminRoute from "./routes/admin.route.js"
 import albumRoute from "./routes/album.route.js"
+import statRoute from "./routes/stats.route.js"
+import songRoute from "./routes/song.route.js"
+import  userRoute from "./routes/user.route.js"
 
 app.use(express.json());
 
@@ -29,6 +32,10 @@ app.use(fileUpload({
 app.use("/api/v1/auth",authRouter);
 app.use("/api/v1/admin",adminRoute) ;
 app.use("/api/v1/album",albumRoute) ;
+app.use("/api/v1/user",userRoute);
+app.use("/api/v1/song",songRoute);
+app.use("/api/v1/stat",statRoute)
+
 
 
 app.listen(PORT,()=>{

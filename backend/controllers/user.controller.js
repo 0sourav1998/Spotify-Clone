@@ -1,0 +1,18 @@
+import User from "../models/user.model";
+
+export const getAllUser = async(req,res)=>{
+    try {
+        const currentUser = req.auth.userId ;
+        const users = User.find({clerkId : {$ne :currentUser}});
+        return res.status(200).json({
+            success: true ,
+            message : "Users Fetched",
+            users
+        })
+    } catch (error) {
+        return res.status(400).json({
+            success : false ,
+            message : "Something Went Wrong While Fetching users"
+        })
+    }
+}
