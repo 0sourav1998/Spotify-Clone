@@ -13,7 +13,7 @@ const Topbar = () => {
   const isAdmin: boolean = false;
 
   return (
-    <div className="w-full p-3 flex justify-between items-center gap-4 shadow-sm shadow-white bg-zinc-950/75 text-bold font-bold ">
+    <div className="w-full p-3 flex justify-between items-center gap-4 border border-gray-700 bg-zinc-800/75 text-bold font-bold">
       <div className="flex flex-row gap-1 items-center">
         <img src={spotify} className="size-7"/>
         <div className="text-white shadow-sm ml-1 text-xl">Spotify</div>
