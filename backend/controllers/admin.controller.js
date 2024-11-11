@@ -10,7 +10,7 @@ export const checkAdmin = async (req, res) => {
 
 export const createSong = async (req, res) => {
   try {
-    if (!req?.files || req?.files?.audioFile || req?.files?.imageFile) {
+    if (!req?.files || !req?.files?.audioFile || !req?.files?.imageFile) {
       return res.status(400).json({
         success: false,
         message: "All Fields Are Required",
@@ -88,10 +88,11 @@ export const deleteSong = async (req, res) => {
   }
 };
 
-export const createAlbum = async () => {
+export const createAlbum = async (req,res) => {
   try {
     const { title, artist, releaseYear } = req.body;
-    const image = req.files.image;
+    const image = req.files.imageUrl;
+    console.log(title,artist,releaseYear,image)
     if (!title || !artist || !releaseYear || !image) {
       return res.status(400).json({
         success: false,
@@ -102,9 +103,10 @@ export const createAlbum = async () => {
       image,
       process.env.CLOUDINARY_FOLDER
     );
+    console.log(imageFromCloudinary)
     if (!imageFromCloudinary) {
       return res.status(400).json({
-        success: "Something Went Wrong While Uploading Image To Cloudinary",
+        success: false,
       });
     }
     const newAlbum = await Album.create({

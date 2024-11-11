@@ -2,8 +2,8 @@ import { clerkClient } from "@clerk/express";
 
 export const isLoggedIn = async(req,res,next)=>{
     try {
-        console.log(req.auth)
-        if(req.auth.userId){
+        console.log(req.auth.userId)
+        if(!req.auth.userId){
             return res.status(400).json({
                 success : false ,
                 message : "User Not Authenticated"

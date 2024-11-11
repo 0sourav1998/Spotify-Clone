@@ -26,7 +26,7 @@ export const getSingleAlbum = async (req, res) => {
         message: "This Filed is Required",
       });
     }
-    const album = await Album.findById(id).populate(songs);
+    const album = await Album.findById(id).populate("songs");
     return res.status(200).json({
       success: true,
       message: "Album Fetched Successfully",

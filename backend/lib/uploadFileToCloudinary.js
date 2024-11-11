@@ -2,9 +2,9 @@ import { v2 as cloudinary } from "cloudinary";
 
 const uploadFileToCloudinary = async (
   file,
+  folder,
   quality,
-  height,
-  folder
+  height
 ) => {
   try {
     const options = {};

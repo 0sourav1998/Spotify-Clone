@@ -4,6 +4,6 @@ const router = express.Router();
 
 
 router.get("/all",getAllAlbum);
-router.get("/album/:id",getSingleAlbum)
+router.get("/:id",getSingleAlbum)
 
 export default router ;
