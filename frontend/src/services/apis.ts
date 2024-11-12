@@ -9,3 +9,7 @@ export const musicEndpoints = {
     GET_ALL_ALBUMS : `${BASE_URL}/album/all`,
     FETCH_SINGLE_ALBUM : `${BASE_URL}/album/:id`
 }
+
+export const userEndpoints = {
+    GET_USERS : `${BASE_URL}/user/users`
+}

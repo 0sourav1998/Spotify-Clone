@@ -2,6 +2,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 import React from 'react'
 import { Outlet } from 'react-router-dom';
 import LeftSidebar from './components/LeftSidebar';
+import RightSidebar from './components/RightSidebar';
 
 const MainComponent = () => {
     const isMobile= false ;
@@ -17,7 +18,7 @@ const MainComponent = () => {
             </ResizablePanel>
             <ResizableHandle />
             <ResizablePanel defaultSize={20} minSize={isMobile? 0 : 10} maxSize={25} collapsedSize={0}>
-               <p className='text-white'>Right Sidebar</p>
+               <p className='text-white'><RightSidebar/></p>
             </ResizablePanel>
         </ResizablePanelGroup>
     </div>

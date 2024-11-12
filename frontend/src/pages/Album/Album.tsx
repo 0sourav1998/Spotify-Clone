@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Clock, Play } from "lucide-react";
+import { formatDate } from "@/lib/formatDate";
 
 const Album = () => {
   const { id } = useParams();
@@ -90,7 +91,7 @@ const Album = () => {
                       <div className="flex items-center">
                         {song.createdAt.split("T")[0]}
                       </div>
-                      <div className="flex items-center">{song.duration}</div>
+                      <div className="flex items-center">{formatDate(song.duration)}</div>
                     </div>
                   ))
                 )}

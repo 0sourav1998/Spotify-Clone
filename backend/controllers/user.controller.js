@@ -3,7 +3,8 @@ import User from "../models/user.model.js";
 export const getAllUser = async(req,res)=>{
     try {
         const currentUser = req.auth.userId ;
-        const users = User.find({clerkId : {$ne :currentUser}});
+        console.log(currentUser)
+        const users = await User.find({clerkId : {$ne :currentUser}});
         return res.status(200).json({
             success: true ,
             message : "Users Fetched",

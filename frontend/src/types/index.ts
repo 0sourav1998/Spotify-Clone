@@ -19,3 +19,10 @@ export interface Albums {
     artist : string ,
     songs : Song[] | null | undefined
 }
+
+export interface User {
+    _id : string,
+    name : string ,
+    imageUrl : string ,
+    clerkId : string
+} 
