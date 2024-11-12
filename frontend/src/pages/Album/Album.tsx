@@ -14,7 +14,6 @@ const Album = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<Boolean>(false);
   const { singleAlbum } = useSelector((state: RootState) => state.music);
-  console.log(id);
   const fetchAlbum = async () => {
     try {
       setLoading(true);
@@ -32,7 +31,7 @@ const Album = () => {
   }, [id]);
   return (
     <div className="h-full">
-      <ScrollArea className="h-full">
+      <ScrollArea className="h-full rounded-md">
         <div className="absolute min-h-screen inset-0 bg-gradient-to-b from-[#5038a0] via-zinc-900/80 to-zinc-900" />
         <div className="relative z-10">
           <div className="flex gap-6 p-6 pb-8">

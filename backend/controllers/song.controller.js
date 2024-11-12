@@ -20,7 +20,7 @@ export const featuredSongs = async (req, res) => {
   try {
     const songs = await Song.aggregate([
       {
-        $sample: 6,
+        $sample: {size : 6},
       },
       {
         $project: {
@@ -45,11 +45,11 @@ export const featuredSongs = async (req, res) => {
   }
 };
 
-export const getMadeForYouSongs = async () => {
+export const getMadeForYouSongs = async (req,res) => {
   try {
     const songs = await Song.aggregate([
       {
-        $sample: 4,
+        $sample: {size:4},
       },
       {
         $project: {
@@ -73,11 +73,11 @@ export const getMadeForYouSongs = async () => {
     });
   }
 };
-export const getTrendingSongs = async () => {
+export const getTrendingSongs = async (req,res) => {
   try {
     const songs = await Song.aggregate([
       {
-        $sample: 6,
+        $sample: {size:4},
       },
       {
         $project: {

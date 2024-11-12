@@ -55,7 +55,7 @@ const LeftSidebar = () => {
             ) : (
               albums?.map((album) => (
                 <Link to={`/album/${album._id}`} key={album._id}>
-                  <div className="flex gap-4 items-center border border-gray-600 rounded-md p-4">
+                  <div className="flex gap-4 items-center shadow-md hover:bg-zinc-900 rounded-md p-4 transition-all duration-200">
                     <img src={album?.imageUrl} className="size-16 rounded-md" />
                     <div className="flex flex-col gap-2 items-center">
                       <p>{album?.title}</p>
