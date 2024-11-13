@@ -1,6 +1,6 @@
 import apiConnector from "@/services/apiConnector";
 import { musicEndpoints } from "@/services/apis";
-import { Albums } from "@/types";
+import { Albums, Song } from "@/types";
 
 const {
   GET_ALL_ALBUMS,
@@ -35,7 +35,7 @@ export const fetchSingleAlbum = async (id: string): Promise<Albums> => {
   return result;
 };
 
-export const fetchFeaturedSongs = async (token: string | null): Promise<any> => {
+export const fetchFeaturedSongs = async (token: string | null): Promise<Song[]> => {
   let result;
   try {
     const res = await apiConnector({
@@ -54,7 +54,7 @@ export const fetchFeaturedSongs = async (token: string | null): Promise<any> => 
   }
   return result;
 };
-export const fetchTrendingSongs = async (token: string | null): Promise<any> => {
+export const fetchTrendingSongs = async (token: string | null): Promise<Song[]> => {
   let result;
   try {
     const res = await apiConnector({
@@ -72,7 +72,8 @@ export const fetchTrendingSongs = async (token: string | null): Promise<any> => 
   }
   return result;
 };
-export const madeForYouSong = async (token: string | null): Promise<any> => {
+
+export const madeForYouSong = async (token: string | null): Promise<Song[]> => {
   let result;
   try {
     const res = await apiConnector({
