@@ -5,6 +5,7 @@ import { fetchTrendingSongs } from "@/services/operations/Music/Music";
 import { useAuth } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AudioPlayerHomePage from "./Controller/AudioPlayerHomePage";
 
 const TrendingSongs = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const TrendingSongs = () => {
     {trendingSongs?.map((song) => (
       <div
         key={song._id}
-        className="flex flex-col gap-1 items-center p-4 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer transform hover:opacity-90"
+        className="relative group flex flex-col gap-1 items-center p-4 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer transform hover:opacity-90"
       >
         <img
           src={song.imageUrl}
@@ -55,6 +56,7 @@ const TrendingSongs = () => {
           {song.title}
         </h3>
         <p className="text-gray-400 text-sm text-center">{song.artist}</p>
+        <AudioPlayerHomePage song={song}/>
       </div>
     ))}
   </div>

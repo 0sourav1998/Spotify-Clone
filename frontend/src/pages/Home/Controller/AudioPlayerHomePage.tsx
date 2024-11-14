@@ -5,12 +5,12 @@ import { Pause, Play } from 'lucide-react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const AudioPlayerFeatured = ({song} : {song : Song}) => {
+const AudioPlayerHomePage = ({song} : {song : Song}) => {
     const {isPlaying,currentSong} = useSelector((state:RootState)=>state.player);
     const isCurrentSong = currentSong?._id === song._id ;
     const dispatch = useDispatch();
 
-    const handlePlayPause = ()=>{
+   const handlePlayPause = ()=>{
         if(isPlaying) dispatch(togglePlay());
         else dispatch(setCurrentSong(song))
     }
@@ -24,4 +24,4 @@ const AudioPlayerFeatured = ({song} : {song : Song}) => {
   )
 }
 
-export default AudioPlayerFeatured
+export default AudioPlayerHomePage ;

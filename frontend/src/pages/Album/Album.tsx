@@ -85,7 +85,7 @@ const Album = () => {
               )}
             </Button>
           </div>
-          <div className="bg-black/20 backdrop-blur-sm">
+          <div className="bg-gradient-to-t from-zinc-800 to-zinc-950 shadow-md">
             <div className="grid grid-cols-[16px_4fr_2fr_1fr] mt-5 p-4 border-white/5">
               <div className="text-zinc-400 pr-4">#</div>
               <div className="text-zinc-400">Title</div>

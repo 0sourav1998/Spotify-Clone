@@ -53,6 +53,9 @@ const playerSlice = createSlice({
         state.isPlaying = false;
       }
     },
+    setIsPlaying : (state)=>{
+      state.isPlaying = true ;
+    },
     playPrevious(state) {
       const prevIndex = state.currentIndex - 1;
       if (prevIndex >= 0) {
@@ -72,6 +75,7 @@ export const {
   setCurrentSong,
   togglePlay,
   playNext,
+  setIsPlaying,
   playPrevious,
 } = playerSlice.actions;
 
