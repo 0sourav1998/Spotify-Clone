@@ -5,6 +5,7 @@ import { fetchFeaturedSongs } from "@/services/operations/Music/Music";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AudioPlayerFeatured from "./Controller/AudioPlayerFeatured";
 
 const FeaturedSongs = () => {
   const dispatch = useDispatch();
@@ -49,11 +50,11 @@ const FeaturedSongs = () => {
         <div className="text-gray-500 cursor-pointer hover:text-gray-300 text-sm transition-all duration-100 hover:underline">See all</div>
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 cursor-pointer">
+      <div className="relative grid sm:grid-cols-2 md:grid-cols-3 gap-6 cursor-pointer">
         {featuredSongs?.map((song) => (
           <div
             key={song._id}
-            className="flex items-center gap-4 p-4 bg-gray-800 bg-opacity-60 rounded-md transition-all duration-300 transform hover:scale-105 hover:bg-opacity-80 shadow-lg"
+            className="flex group items-center gap-4 p-4 bg-gray-800 bg-opacity-60 rounded-md transition-all duration-300 transform hover:scale-105 hover:bg-opacity-80 shadow-lg"
           >
             <img
               src={song.imageUrl}
@@ -68,6 +69,7 @@ const FeaturedSongs = () => {
                 {song.artist}
               </span>
             </div>
+            <AudioPlayerFeatured song={song}/> 
           </div>
         ))}
       </div>

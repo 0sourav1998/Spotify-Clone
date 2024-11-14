@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Clock, Pause, Play } from "lucide-react";
+import { BarChart, BarChart2, Clock, Music, Music2Icon, Music3, Pause, Pipette, Play, PlayIcon } from "lucide-react";
 import { formatDate } from "@/lib/formatDate";
 import { playAlbum, togglePlay } from "@/redux/slice/Music/PlayerStore";
 
@@ -73,15 +73,15 @@ const Album = () => {
           <div>
             <Button
               onClick={handlePlayAlbum}
-              className="size-14 bg-green-400 hover:bg-green-500 transition-all duration-300 ml-6 rounded-full hover:scale-110"
+              className="size-14 bg-blue-500 hover:bg-blue-700 transition-all duration-300 ml-6 rounded-full hover:scale-110"
             >
               {isPlaying && singleAlbum?.songs &&
               singleAlbum?.songs.some(
                 (song) => song._id === currentSong?._id
               ) ? (
-                <Pause className="h-7 w-7 text-zinc-950" />
+                <Pause className="h-7 w-7 text-zinc-50" />
               ) : (
-                <Play className="h-7 w-7 text-zinc-950" />
+                <Play className="h-7 w-7 text-zinc-50" />
               )}
             </Button>
           </div>
@@ -112,7 +112,7 @@ const Album = () => {
                         <div className="flex items-center justify-center">
                           <span className="group-hover:hidden">
                             {isCurrentSong && isPlaying ? (
-                              <div className="size-4 text-green-500">♫</div>
+                              <div className="size-4 text-green-500"><BarChart2 className="animate-pulse"/></div>
                             ) : (
                               <span className="group-hover:hidden">
                                 {index + 1}
