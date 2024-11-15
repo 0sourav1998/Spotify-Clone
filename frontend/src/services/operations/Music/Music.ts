@@ -8,6 +8,7 @@ const {
   FETCH_FEATURED_SONGS,
   FETCH_TRENDING_SONGS,
   FETCH_MADE_FOR_YOU,
+  GET_ALL_SONGS
 } = musicEndpoints;
 
 export const fetchAllAlbums = async () => {
@@ -83,7 +84,6 @@ export const madeForYouSong = async (token: string | null): Promise<Song[]> => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("RESPONE",res)
     if (res?.data?.success) {
       result = res?.data?.songs;
     }
@@ -92,3 +92,22 @@ export const madeForYouSong = async (token: string | null): Promise<Song[]> => {
   }
   return result;
 };
+
+export const fetchAllSongs = async(token:string) : Promise<Song[]>=>{
+  let result ;
+  try {
+    const response = await apiConnector({
+      method : "GET",
+      url : GET_ALL_SONGS,
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    })
+    if(response && response.data.success){
+      result = response?.data.songs 
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return result ;
+}

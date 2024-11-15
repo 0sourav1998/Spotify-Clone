@@ -14,8 +14,6 @@ import { isUserAdminFunction } from "@/services/operations/User/User";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserIsAdmin } from "@/redux/slice/User/User";
 import { RootState } from "@/main";
-import { fetchFeaturedSongs, fetchTrendingSongs, madeForYouSongs } from "@/services/operations/Music/Music";
-import { setFeaturedSongs, setMadeForYouSongs, setTrendingSongs } from "@/redux/slice/Music/Music";
 
 const Topbar = () => {
   const { getToken } = useAuth();
@@ -27,7 +25,7 @@ const Topbar = () => {
   const fetchIsAdminOrNot = async () => {
     const token = await getToken();
     const res = await isUserAdminFunction(token);
-    console.log(res);
+    console.log(res)
     dispatch(setUserIsAdmin(res));
   };
 

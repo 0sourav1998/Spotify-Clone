@@ -10,7 +10,14 @@ export const musicEndpoints = {
     FETCH_SINGLE_ALBUM : `${BASE_URL}/album/:id`,
     FETCH_FEATURED_SONGS : `${BASE_URL}/song/featured-songs`,
     FETCH_MADE_FOR_YOU : `${BASE_URL}/song/made-for-you`,
-    FETCH_TRENDING_SONGS : `${BASE_URL}/song/trending-songs`
+    FETCH_TRENDING_SONGS : `${BASE_URL}/song/trending-songs`,
+    GET_ALL_SONGS : `${BASE_URL}/song/songs` ,
+    
+}
+
+
+export const statEndpoint = {
+    FETCH_STATS : `${BASE_URL}/stat/stats`
 }
 
 export const userEndpoints = {
