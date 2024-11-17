@@ -19,7 +19,6 @@ import { useDispatch, useSelector } from "react-redux";
 const SongTable = () => {
   const { songs } = useSelector((state: RootState) => state.admin);
   const [loadingSongs, setLoadingSongs] = useState<Record<string, boolean>>({}); // Track loading per song
-  console.log(loadingSongs)
   const dispatch = useDispatch();
   const { getToken } = useAuth();
 
