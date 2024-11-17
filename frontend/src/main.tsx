@@ -3,7 +3,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { BrowserRouter } from "react-router-dom";
-import { Toaster } from "./components/ui/toaster.tsx";
+import { Toaster } from "react-hot-toast";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { persistStore, persistReducer } from "redux-persist";

@@ -33,3 +33,13 @@ export interface Stats {
   userCount: number;
   uniqueArtistCount: number;
 }
+
+
+export interface songType {
+  title: string;
+  artist: string;
+  album: string;
+  duration: number;
+  image: File | null;
+  audio: File | null;
+}

@@ -39,9 +39,11 @@ export const createSong = async (req, res) => {
         $push: { songs: newSong._id },
       });
     }
+    const allSongs = await Song.find({})
     return res.status(201).json({
       success: true,
       message: "Song Created",
+      allSongs ,
       newSong,
       newAlbum,
     });
@@ -55,6 +57,7 @@ export const createSong = async (req, res) => {
 export const deleteSong = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id)
     if (!id) {
       return res.status(400).json({
         success: false,
@@ -68,6 +71,7 @@ export const deleteSong = async (req, res) => {
         message: "Song Not Found",
       });
     }
+    console.log(song)
     if (song.albumId) {
       await Album.findByIdAndUpdate(song.albumId, {
         $pull: { songs: song._id },

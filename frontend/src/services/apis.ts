@@ -12,7 +12,8 @@ export const musicEndpoints = {
     FETCH_MADE_FOR_YOU : `${BASE_URL}/song/made-for-you`,
     FETCH_TRENDING_SONGS : `${BASE_URL}/song/trending-songs`,
     GET_ALL_SONGS : `${BASE_URL}/song/songs` ,
-    
+    DELETE_SONG : `${BASE_URL}/admin/song/:id` ,
+    CREATE_SONG : `${BASE_URL}/admin/createSong`
 }
 
 

@@ -1,6 +1,6 @@
 import apiConnector from "@/services/apiConnector";
 import { musicEndpoints } from "@/services/apis";
-import { Albums, Song } from "@/types";
+import { Albums, Song, songType } from "@/types";
 
 const {
   GET_ALL_ALBUMS,
@@ -8,7 +8,9 @@ const {
   FETCH_FEATURED_SONGS,
   FETCH_TRENDING_SONGS,
   FETCH_MADE_FOR_YOU,
-  GET_ALL_SONGS
+  GET_ALL_SONGS ,
+  DELETE_SONG ,
+  CREATE_SONG
 } = musicEndpoints;
 
 export const fetchAllAlbums = async () => {
@@ -105,6 +107,46 @@ export const fetchAllSongs = async(token:string) : Promise<Song[]>=>{
     })
     if(response && response.data.success){
       result = response?.data.songs 
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return result ;
+}
+
+export const deleteSongs = async(id : string , token : string) : Promise<Song> =>{
+  let result ;
+  try {
+    const NEW_DELETE_URL = DELETE_SONG.replace(":id",id);
+    const response = await apiConnector({
+      method : "DELETE",
+      url : NEW_DELETE_URL,
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    });
+    if(response && response.data.success){
+      result = response.data.deletedSong
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return result ;
+}
+
+export const createSong = async(formData : any,token:string) : Promise<Song[]> =>{
+  let result ;
+  try {
+    const response = await apiConnector({
+      method : "POST",
+      url : CREATE_SONG,
+      data : formData ,
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    });
+    if(response && response.data.success){
+      result = response.data.allSongs
     }
   } catch (error) {
     console.log(error)

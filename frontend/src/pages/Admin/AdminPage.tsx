@@ -15,12 +15,12 @@ import {
 import { fetchStats } from "@/services/operations/Stats/Stat";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { isUserAdminFunction } from "@/services/operations/User/User";
+import StatGrid from "./components/StatGrid";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
   const { user } = useUser();
   const { getToken } = useAuth();
-
 
   const { isUserAdmin } = useSelector((state: RootState) => state.user);
   if (!isUserAdmin) return <p>UnAuthorized</p>;
@@ -41,9 +41,9 @@ const AdminPage = () => {
     try {
       const token = await getToken();
       const result = await fetchStats(token as string);
-      const {songCount,albumCount,uniqueArtistCount,userCount} = result ;
-      const stats =  {songCount,albumCount,uniqueArtistCount,userCount} 
-      dispatch(setStats(stats))
+      const { songCount, albumCount, uniqueArtistCount, userCount } = result;
+      const stats = { songCount, albumCount, uniqueArtistCount, userCount };
+      dispatch(setStats(stats));
     } catch (error) {
       console.log(error);
     }
@@ -55,41 +55,41 @@ const AdminPage = () => {
   };
 
   useEffect(() => {
-    //fetch all songs
+    
     fetchSongs();
-    //fetch all albums
     fetchAlbums();
-    // fetch stats
     fetchStatsFunction();
   }, []);
   return (
-    <div className="bg-black min-h-screen w-full text-gray-50">
-      <Header />
-      <Stats />
-      <Tabs defaultValue="songs">
-        <TabsList className="border border-zinc-800/80 rounded-md p-1">
-          <TabsTrigger
-            value="songs"
-            className="data-[state=active]:bg-zinc-800"
-          >
-            <Music className="size-4 mr-2" />
-            Songs
-          </TabsTrigger>
-          <TabsTrigger
-            value="albums"
-            className="data-[state=active]:bg-zinc-700"
-          >
-            <Album className="size-4 mr-2" />
-            Albums
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="songs">
-          <SongsContent />
-        </TabsContent>
-        <TabsContent value="albums">
-          <AlbumContent />
-        </TabsContent>
-      </Tabs>
+    <div className="bg-black min-h-screen text-gray-50 pb-6">
+      <div className="max-w-7xl mx-auto pt-6">
+        <Header />
+        <StatGrid />
+        <Tabs defaultValue="songs">
+          <TabsList className="border border-zinc-800/80 rounded-md p-1">
+            <TabsTrigger
+              value="songs"
+              className="data-[state=active]:bg-zinc-800"
+            >
+              <Music className="size-4 mr-2" />
+              Songs
+            </TabsTrigger>
+            <TabsTrigger
+              value="albums"
+              className="data-[state=active]:bg-zinc-700"
+            >
+              <Album className="size-4 mr-2" />
+              Albums
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="songs">
+            <SongsContent />
+          </TabsContent>
+          <TabsContent value="albums">
+            <AlbumContent />
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
