@@ -2,7 +2,6 @@ import { RootState } from "@/main";
 import React, { useDebugValue, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/Header";
-import Stats from "./components/Stats";
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import { Album, Music } from "lucide-react";
 import SongsContent from "./components/SongsContent";
