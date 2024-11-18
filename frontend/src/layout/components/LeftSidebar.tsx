@@ -58,8 +58,8 @@ const LeftSidebar = () => {
                   <div className="flex gap-4 items-center shadow-md hover:bg-zinc-900 rounded-md p-4 transition-all duration-200">
                     <img src={album?.imageUrl} className="size-16 rounded-md" />
                     <div className="flex flex-col gap-2 items-center">
-                      <p>{album?.title}</p>
-                      <p>Artist : {album?.artist}</p>
+                      <p className="font-bold">{album?.title.length > 15 ? album.title.substring(0,15) + "..." : album.title}</p>
+                      <p className="font-semibold text-gray-400">Artist : {album?.artist.length > 10 ? album.artist.substring(0,10) + "..." : album.artist}</p>
                     </div>
                   </div>
                 </Link>

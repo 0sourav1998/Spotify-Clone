@@ -10,7 +10,9 @@ const {
   FETCH_MADE_FOR_YOU,
   GET_ALL_SONGS ,
   DELETE_SONG ,
-  CREATE_SONG
+  CREATE_SONG ,
+  CREATE_ALBUM ,
+  DELETE_ALBUM
 } = musicEndpoints;
 
 export const fetchAllAlbums = async () => {
@@ -147,6 +149,48 @@ export const createSong = async(formData : any,token:string) : Promise<Song[]> =
     });
     if(response && response.data.success){
       result = response.data.allSongs
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return result ;
+}
+
+export const createAlbum = async(formData : any,token:string) : Promise<Albums[]> =>{
+  let result ;
+  try {
+    const response = await apiConnector({
+      method : "POST",
+      url : CREATE_ALBUM,
+      data : formData ,
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    });
+    if(response && response.data.success){
+      result = response.data.allAlbums
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return result ;
+}
+
+
+
+export const deleteAlbum = async(id : string , token : string) : Promise<Albums> =>{
+  let result ;
+  try {
+    const NEW_DELETE_URL = DELETE_ALBUM.replace(":id",id);
+    const response = await apiConnector({
+      method : "DELETE",
+      url : NEW_DELETE_URL,
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    });
+    if(response && response.data.success){
+      result = response.data.deletedAlbum
     }
   } catch (error) {
     console.log(error)

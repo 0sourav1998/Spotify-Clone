@@ -25,6 +25,7 @@ export const createSong = async (req, res) => {
       process.env.CLOUDINARY_FOLDER
     );
     const { title, artist, duration, albumId } = req.body;
+    console.log(duration,typeof duration)
     const newSong = await Song.create({
       title,
       artist,
@@ -48,6 +49,7 @@ export const createSong = async (req, res) => {
       newAlbum,
     });
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json({
       message: "Internal Server Error !!!",
     });
@@ -119,9 +121,11 @@ export const createAlbum = async (req,res) => {
       releaseYear,
       imageUrl: imageFromCloudinary.secure_url,
     });
+    const allAlbums = await Album.find({})
     return res.status(201).json({
       success: true,
       message: "Album Created Successfully",
+      allAlbums
     });
   } catch (error) {
     console.error(error.message);
@@ -132,7 +136,7 @@ export const createAlbum = async (req,res) => {
   }
 };
 
-export const deleteAlbum = async () => {
+export const deleteAlbum = async (req,res) => {
   try {
     const { id } = req.params;
     if (!id) {

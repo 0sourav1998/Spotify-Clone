@@ -43,3 +43,9 @@ export interface songType {
   image: File | null;
   audio: File | null;
 }
+export interface albumType {
+  title: string;
+  artist: string;
+  releaseYear : string;
+  image: File | null;
+}

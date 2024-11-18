@@ -63,10 +63,10 @@ const FeaturedSongs = () => {
             />
             <div className="flex flex-col text-gray-50">
               <span className="font-semibold text-lg truncate">
-                {song.title}
+                {song.title.length > 15 ? song.title.substring(0,15) + "..." : song.title}
               </span>
               <span className="font-medium text-sm text-gray-400 truncate">
-                {song.artist}
+                {song.artist.length > 15 ? song.artist.substring(0,15) + "..." : song.artist}
               </span>
             </div>
             <AudioPlayerFeatured song={song}/> 

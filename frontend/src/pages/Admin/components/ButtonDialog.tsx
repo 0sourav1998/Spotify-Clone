@@ -34,6 +34,7 @@ const ButtonDialog = () => {
   });
 
   const handleCreateSong = async () => {
+    console.log(song)
     const token = await getToken();
     const formData = new FormData();
     formData.append("title", song.title);
@@ -44,6 +45,9 @@ const ButtonDialog = () => {
     }
     if (song.image) {
       formData.append("imageFile", song.image);
+    }
+    if(song.album){
+      formData.append("albumId",song.album)
     }
     try {
       setLoading(true);
@@ -194,7 +198,7 @@ const ButtonDialog = () => {
             }
           >
             <option value="">Select Album</option>
-            {albums.map((album) => (
+            {albums?.map((album) => (
               <option key={album._id} value={album._id}>
                 {album.title}
               </option>

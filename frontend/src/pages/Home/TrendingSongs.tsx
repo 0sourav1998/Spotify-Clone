@@ -53,7 +53,7 @@ const TrendingSongs = () => {
           className="w-32 h-32 rounded-md mb-4 shadow-md"
         />
         <h3 className="text-gray-50 font-semibold text-lg text-center">
-          {song.title}
+        {song.title.length > 10 ? song.title.substring(0,10) + "..." : song.title}
         </h3>
         <p className="text-gray-400 text-sm text-center">{song.artist}</p>
         <AudioPlayerHomePage song={song}/>
