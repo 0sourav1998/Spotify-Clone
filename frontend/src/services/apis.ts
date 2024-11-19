@@ -25,5 +25,11 @@ export const statEndpoint = {
 
 export const userEndpoints = {
     GET_USERS : `${BASE_URL}/user/users`,
-    IS_ADMIN : `${BASE_URL}/admin/check-admin`
+    IS_ADMIN : `${BASE_URL}/admin/check-admin`,
+    USER_BY_ID : `${BASE_URL}/user/user/:id`
+}
+
+export const messageEndpoints = {
+    GET_ALL : `${BASE_URL}/message/allMessages/:id`,
+    SEND_MESSAGE : `${BASE_URL}/message/send`
 }

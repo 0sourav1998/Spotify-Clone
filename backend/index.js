@@ -12,6 +12,8 @@ import albumRoute from "./routes/album.route.js";
 import statRoute from "./routes/stats.route.js";
 import songRoute from "./routes/song.route.js";
 import userRoute from "./routes/user.route.js";
+import messageRoute from "./routes/message.route.js";
+
 import cors from "cors";
 import { initializeServer } from "./socket/socket.js";
 import http from "http"
@@ -48,6 +50,7 @@ app.use("/api/v1/album", albumRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/song", songRoute);
 app.use("/api/v1/stat", statRoute);
+app.use("/api/v1/message",messageRoute);
 
 
 httpServer.listen(PORT, () => {

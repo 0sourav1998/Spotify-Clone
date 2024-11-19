@@ -49,3 +49,13 @@ export interface albumType {
   releaseYear : string;
   image: File | null;
 }
+
+
+export interface Message {
+  _id : string ,
+  senderId : string ,
+  receiverId : string ,
+  message : string,
+  createdAt : string ,
+  updatedAt : string
+}

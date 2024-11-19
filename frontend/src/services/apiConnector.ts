@@ -5,7 +5,7 @@ const axiosInstance = axios.create();
 interface ApiConnectorParams {
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   url: string;
-  data?: object;
+  data?: object | string;
   headers?: object;
   params?: object;
 }

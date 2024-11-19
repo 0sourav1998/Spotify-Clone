@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
  const messageSchema = new mongoose.Schema({
     senderId : {
-        type : String ,
-        required : true
+        type : mongoose.Schema.Types.ObjectId ,
+        ref : "User"
     },
     receiverId : {
-        type : String ,
-        required : true
+         type : mongoose.Schema.Types.ObjectId ,
+        ref : "User"
     },
     message : {
         type : String ,
