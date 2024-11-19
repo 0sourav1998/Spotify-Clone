@@ -34,7 +34,6 @@ const ButtonDialog = () => {
   });
 
   const handleCreateSong = async () => {
-    console.log(song)
     const token = await getToken();
     const formData = new FormData();
     formData.append("title", song.title);
@@ -53,7 +52,6 @@ const ButtonDialog = () => {
       setLoading(true);
       const res = await createSong(formData, token as string);
       if (res) {
-        toast.success("Song Created Successfully");
         dispatch(setAllSongs(res));
         setOpen(false)
       }

@@ -3,7 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { setAlbums } from "@/redux/slice/Music/Music";
 import { fetchAllAlbums } from "@/services/operations/Music/Music";
 import { SignedIn } from "@clerk/clerk-react";
-import { HomeIcon, Library, MessageCircle } from "lucide-react";
+import { Album, HomeIcon, Library, MessageCircle } from "lucide-react";
 import React, { useEffect } from "react";
 import { RootState } from "@/main";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const LeftSidebar = () => {
         </Link>
         <SignedIn>
           <Link
-            to={"/chat"}
+            to={"/"}
             className="flex flex-row gap-4 hover:bg-zinc-900 transition-colors duration-300 p-2 rounded-md"
           >
             <MessageCircle />
@@ -51,7 +51,7 @@ const LeftSidebar = () => {
             {isLoading ? (
               <PlaylistSkeleton />
             ) : albums?.length === 0 ? (
-              <p>No Albums Found</p>
+              <p className="text-gray-400 flex gap-4 items-center justify-center h-full w-full"><Album/>No Albums Found</p>
             ) : (
               albums?.map((album) => (
                 <Link to={`/album/${album._id}`} key={album._id}>

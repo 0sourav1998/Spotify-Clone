@@ -17,29 +17,33 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const SongTable = () => {
-  const { songs } = useSelector((state: RootState) => state.admin);
-  const [loadingSongs, setLoadingSongs] = useState<Record<string, boolean>>({}); // Track loading per song
+  const { songs , songLoading } = useSelector((state: RootState) => state.admin);
+  const [loadingSongs, setLoadingSongs] = useState<Record<string, boolean>>({});
   const dispatch = useDispatch();
   const { getToken } = useAuth();
 
   const deleteSong = async (id: string) => {
     try {
-      setLoadingSongs((prev) => ({ ...prev, [id]: true })); // Set loading for this specific song
+      setLoadingSongs((prev) => ({ ...prev, [id]: true }));
       const token = await getToken();
       if (token && id) {
         const res = await deleteSongs(id, token);
         toast.success("Song Deleted Successfully");
-
-        // Filter out the deleted song and update the state
         const updatedResult = songs.filter((s) => s._id !== res._id);
         dispatch(setAllSongs(updatedResult));
       }
     } catch (error) {
       console.log(error);
     } finally {
-      setLoadingSongs((prev) => ({ ...prev, [id]: false })); // Reset loading for this song
+      setLoadingSongs((prev) => ({ ...prev, [id]: false }));
     }
   };
+
+  if(songLoading){
+    return <div className="flex justify-center items-center">
+      <Loader className="text-green-700 animate-spin"/>
+    </div>
+  }
 
   return (
     <Table>

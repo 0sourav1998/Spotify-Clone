@@ -1,12 +1,12 @@
 import { RootState } from "@/main";
-import React, { useDebugValue, useEffect } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/Header";
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import { Album, Music } from "lucide-react";
 import SongsContent from "./components/SongsContent";
 import AlbumContent from "./components/AlbumContent";
-import { setAllAlbums, setAllSongs, setStats } from "@/redux/slice/Admin/Admin";
+import { setAlbumLoading, setAllAlbums, setAllSongs, setSongLoading, setStats } from "@/redux/slice/Admin/Admin";
 import {
   fetchAllAlbums,
   fetchAllSongs,
@@ -26,6 +26,7 @@ const AdminPage = () => {
 
   const fetchSongs = async () => {
     try {
+      dispatch(setSongLoading(true))
       const token = await getToken();
       const result = await fetchAllSongs(token as string);
       if (result) {
@@ -33,6 +34,8 @@ const AdminPage = () => {
       }
     } catch (error) {
       console.log(error);
+    }finally{
+      dispatch(setSongLoading(false))
     }
   };
 
@@ -49,8 +52,15 @@ const AdminPage = () => {
   };
 
   const fetchAlbums = async () => {
-    const albums = await fetchAllAlbums();
-    dispatch(setAllAlbums(albums));
+    try {
+      dispatch(setAlbumLoading(true))
+      const albums = await fetchAllAlbums();
+       dispatch(setAllAlbums(albums));
+    } catch (error) {
+      console.log(error)
+    }finally{
+      dispatch(setAlbumLoading(false))
+    }
   };
 
   useEffect(() => {

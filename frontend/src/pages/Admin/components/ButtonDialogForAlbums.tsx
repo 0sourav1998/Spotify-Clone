@@ -43,7 +43,6 @@ const ButtonDialogForAlbums = () => {
       setLoading(true);
       const res = await createAlbum(formData, token as string);
       if (res) {
-        toast.success("Album Created Successfully");
         dispatch(setAllAlbums(res));
         setOpen(false)
       }

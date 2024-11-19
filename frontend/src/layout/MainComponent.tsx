@@ -13,7 +13,7 @@ import PlaybackControls from "./components/PlaybackControls";
 const MainComponent = () => {
   const isMobile = false;
   return (
-    <div className="h-screen bg-black">
+    <div className="h-screen bg-black overflow-hidden">
       <ResizablePanelGroup
         direction="horizontal"
         className="h-full overflow-hidden flex-1 flex p-2"

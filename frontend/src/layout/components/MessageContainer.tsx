@@ -2,57 +2,73 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import useGetMessages from "@/hooks/useGetMessages";
 import useGetRealTimeMessages from "@/hooks/useGetRealTimeMessages";
 import { RootState } from "@/main";
-import { Message } from "@/types";
 import { MessageCircleDashed, MessageCirclePlus, Timer } from "lucide-react";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { formatDistanceToNow, parseISO } from "date-fns";
 
 const MessageContainer = () => {
   const { id } = useParams();
   useGetMessages(id as string);
   useGetRealTimeMessages();
 
+  const scrollRef = useRef<HTMLDivElement | null>(null)
+
   const { messages } = useSelector((state: RootState) => state.chat);
 
+  useEffect(()=>{
+    if(scrollRef.current){
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight ; 
+    }
+  },[messages])
+
   return (
-    <ScrollArea className="">
+    <ScrollArea ref={scrollRef} className="bg-gray-900 rounded-md p-4 h-[95%]">
       {messages?.length !== 0 ? (
-        <div className="p-4">
-          {messages?.map((msg) => (
-            <div
-              key={msg._id}
-              className={`flex flex-row w-full items-center gap-4 ${
-                msg?.senderId?.clerkId === id
-                  ? "flex-row-reverse flex-end"
-                  : "flex-start"
-              }`}
-            >
-              <div>
-                <img
-                  src={msg.senderId.imageUrl}
-                  className="rounded-full size-12"
-                />
-              </div>
+        <div className="p-3">
+          {messages?.map((msg) => {
+            const createdAtDate = parseISO(msg.createdAt);
+            const timeAgo = formatDistanceToNow(createdAtDate, {
+              addSuffix: true,
+            });
+            return (
               <div
-                className={`text-gray-300 font-medium p-4 mb-4 w-[30%] rounded-lg shadow-lg ${
-                  msg.senderId?.clerkId === id
-                    ? "bg-blue-600 text-right"
-                    : "bg-gray-700 text-left"
+                key={msg._id}
+                className={`flex flex-row w-full items-center gap-4 ${
+                  msg?.senderId?.clerkId === id
+                    ? "flex-row-reverse flex-end"
+                    : "flex-start"
                 }`}
               >
-                <span className="pb-4">{msg.message}</span>
-                {/* <span className="text-xs text-gray-200 flex items-center gap-2 mt-2">
-                  <Timer size={16} />
-                  {msg.createdAt.split("T")[0]}
-                </span> */}
+                <div>
+                  <img
+                    src={msg.senderId.imageUrl}
+                    className="rounded-full size-12"
+                  />
+                </div>
+                <div className="flex flex-col mb-4 gap-1 w-[30%]">
+                  <div
+                    className={`text-gray-300 font-medium  rounded-lg  p-4 ${
+                      msg.senderId?.clerkId === id
+                        ? "bg-blue-600 text-right"
+                        : "bg-gray-700 text-left"
+                    }`}
+                  >
+                    <span className="pb-4">{msg.message}</span>
+                  </div>
+                  <span className="text-[8px] text-gray-200 flex items-center">
+                    <Timer size={16} />
+                    {timeAgo}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         <p className="font-bold text-gray-400 flex gap-4 items-center justify-center h-[50vh]">
-          <MessageCirclePlus className="size-8"/>
+          <MessageCirclePlus className="size-8" />
           <span>No Messages Found</span>
         </p>
       )}

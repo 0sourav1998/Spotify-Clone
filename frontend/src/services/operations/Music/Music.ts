@@ -1,6 +1,7 @@
 import apiConnector from "@/services/apiConnector";
 import { musicEndpoints } from "@/services/apis";
 import { Albums, Song, songType } from "@/types";
+import toast from "react-hot-toast";
 
 const {
   GET_ALL_ALBUMS,
@@ -20,8 +21,8 @@ export const fetchAllAlbums = async () => {
   try {
     const res = await apiConnector({ method: "GET", url: GET_ALL_ALBUMS });
     result = res?.data.allAlbum;
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    toast.error(error.res.data.message)
   }
   return result;
 };
@@ -34,8 +35,8 @@ export const fetchSingleAlbum = async (id: string): Promise<Albums> => {
     if (res?.data.success) {
       result = res?.data?.album;
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    toast.error(error.res.data.message)
   }
   return result;
 };
@@ -54,8 +55,8 @@ export const fetchFeaturedSongs = async (token: string | null): Promise<Song[]> 
     if (res?.data?.success) {
       result = res.data.songs;
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    toast.error(error.res.data.message)
   }
   return result;
 };
@@ -72,8 +73,8 @@ export const fetchTrendingSongs = async (token: string | null): Promise<Song[]> 
     if (res?.data?.success) {
       result = res?.data?.songs;
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    toast.error(error.res.data.message)
   }
   return result;
 };
@@ -91,8 +92,8 @@ export const madeForYouSong = async (token: string | null): Promise<Song[]> => {
     if (res?.data?.success) {
       result = res?.data?.songs;
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    toast.error(error.res.data.message)
   }
   return result;
 };
@@ -110,8 +111,8 @@ export const fetchAllSongs = async(token:string) : Promise<Song[]>=>{
     if(response && response.data.success){
       result = response?.data.songs 
     }
-  } catch (error) {
-    console.log(error)
+  } catch (error:any) {
+    toast.error(error.response.data.message)
   }
   return result ;
 }
@@ -148,10 +149,11 @@ export const createSong = async(formData : any,token:string) : Promise<Song[]> =
       }
     });
     if(response && response.data.success){
+      toast.success("Song Created Successfully");
       result = response.data.allSongs
     }
-  } catch (error) {
-    console.log(error)
+  } catch (error:any) {
+    toast.error(error.response.data.message);
   }
   return result ;
 }
@@ -168,10 +170,11 @@ export const createAlbum = async(formData : any,token:string) : Promise<Albums[]
       }
     });
     if(response && response.data.success){
+      toast.success("Album Created Successfully");
       result = response.data.allAlbums
     }
-  } catch (error) {
-    console.log(error)
+  } catch (error : any) {
+    toast.error(error.response.data.message);
   }
   return result ;
 }

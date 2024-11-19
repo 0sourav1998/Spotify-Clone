@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 const AlbumTable = () => {
   const { albums } = useSelector((state: RootState) => state.admin);
   const [loadingSongs, setLoadingSongs] = useState<Record<string, boolean>>({});
-  const {getToken} = useAuth();
+  const { getToken } = useAuth();
   const dispatch = useDispatch();
 
   const deleteAlbumFunc = async (id: string) => {
@@ -51,21 +51,21 @@ const AlbumTable = () => {
       </TableHeader>
       <TableBody>
         {albums && albums.length !== 0 ? (
-          albums.map((album)=>(
+          albums.map((album) => (
             <TableRow key={album._id}>
-            <TableCell className="flex gap-2 items-center">
-                <img src={album.imageUrl} className="size-12 rounded-md"/>
+              <TableCell className="flex gap-2 items-center">
+                <img src={album.imageUrl} className="size-12 rounded-md" />
                 <span>{album.title}</span>
-            </TableCell>
-            <TableCell>{album.artist}</TableCell>
-            <TableCell>{album.releaseYear}</TableCell>
-            <TableCell>{album.songs?.length} Songs</TableCell>
-            <TableCell className="text-right">
+              </TableCell>
+              <TableCell>{album.artist}</TableCell>
+              <TableCell>{album.releaseYear}</TableCell>
+              <TableCell>{album.songs?.length} Songs</TableCell>
+              <TableCell className="text-right">
                 <Button
                   onClick={() => deleteAlbumFunc(album._id as string)}
                   variant={"ghost"}
                   className="text-red-400 hover:text-red-300 hover:bg-red-400/10 hover:scale-110 transition-all duration-300"
-                  disabled={loadingSongs[album._id as string]} 
+                  disabled={loadingSongs[album._id as string]}
                 >
                   {loadingSongs[album._id as string] ? (
                     <Loader className="animate-spin" />
@@ -74,10 +74,17 @@ const AlbumTable = () => {
                   )}
                 </Button>
               </TableCell>
-          </TableRow>
+            </TableRow>
           ))
         ) : (
-          <p>No Albums Found</p>
+          <TableRow>
+            <TableCell
+              colSpan={4}
+              className="text-center py-8 text-red-600 text-xl mt-6 pl-32"
+            >
+              No Albums Found
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
     </Table>

@@ -62,7 +62,7 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="text-white h-[90vh] flex flex-col relative mb-48">
+    <div className="text-white h-[93%] flex flex-col overflow-y-hidden relative">
       <div className="flex items-center gap-4 border-b p-4">
         <img
           src={selectedUser?.imageUrl}

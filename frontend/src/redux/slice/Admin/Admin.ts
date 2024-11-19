@@ -5,6 +5,8 @@ interface initialStateTypes {
   songs: Song[];
   albums: Albums[];
   stats: Stats;
+  songLoading : boolean ,
+  albumLoading : boolean ,
 }
 
 const initialState: initialStateTypes = {
@@ -16,6 +18,8 @@ const initialState: initialStateTypes = {
     userCount: 0,
     uniqueArtistCount: 0,
   },
+  songLoading : false ,
+  albumLoading : false 
 };
 
 export const adminSlice = createSlice({
@@ -30,9 +34,15 @@ export const adminSlice = createSlice({
     },
     setStats : (state,action:PayloadAction<Stats>)=>{
       state.stats = action.payload
+    } ,
+    setSongLoading : (state,action:PayloadAction<boolean>)=>{
+      state.songLoading = action.payload;
+    },
+    setAlbumLoading : (state,action:PayloadAction<boolean>)=>{
+      state.albumLoading = action.payload;
     }
   },
 });
 
-export const { setAllAlbums, setAllSongs , setStats } = adminSlice.actions;
+export const { setAllAlbums, setAllSongs , setStats , setAlbumLoading ,setSongLoading } = adminSlice.actions;
 export default adminSlice.reducer;
