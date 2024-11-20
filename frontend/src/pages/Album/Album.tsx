@@ -2,20 +2,18 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { setSingleAlbum } from "@/redux/slice/Music/Music";
 import { fetchSingleAlbum } from "@/services/operations/Music/Music";
 import { RootState } from "@/main";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BarChart, BarChart2, Clock, Music, Music2Icon, Music3, Pause, Pipette, Play, PlayIcon } from "lucide-react";
+import { BarChart2, Clock, Pause, Play } from "lucide-react";
 import { formatDate } from "@/lib/formatDate";
 import { playAlbum, togglePlay } from "@/redux/slice/Music/PlayerStore";
-import { useUser } from "@clerk/clerk-react";
 
 
 const Album = () => {
   const { id } = useParams<{id : string}>();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState<Boolean>(false);
   const { singleAlbum } = useSelector((state: RootState) => state.music);
   
 
@@ -43,13 +41,11 @@ const Album = () => {
   const fetchAlbum = async () => {
     if(!id) return ;
     try {
-      setLoading(true);
       const result = await fetchSingleAlbum(id);
       dispatch(setSingleAlbum(result));
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
   };
   useEffect(() => {
     if (id) {

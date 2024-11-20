@@ -1,6 +1,6 @@
 import { RootState } from "@/main";
 import { addMessage } from "@/redux/slice/chat/chat";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useGetRealTimeMessages = () => {

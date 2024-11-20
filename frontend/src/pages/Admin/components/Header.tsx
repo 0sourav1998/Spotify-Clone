@@ -1,4 +1,3 @@
-import React from "react";
 import spotify from "../../../assets/spotify.png";
 import { UserButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";

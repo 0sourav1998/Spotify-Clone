@@ -3,9 +3,8 @@ import { RootState } from "@/main";
 import { setMadeForYouSongs } from "@/redux/slice/Music/Music";
 import { madeForYouSong } from "@/services/operations/Music/Music";
 import { useAuth } from "@clerk/clerk-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AudioPlayerFeatured from "./Controller/AudioPlayerHomePage";
 import AudioPlayerHomePage from "./Controller/AudioPlayerHomePage";
 
 const MadeForYou = () => {

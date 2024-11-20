@@ -7,15 +7,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { RootState } from "@/main";
 import { setAllAlbums } from "@/redux/slice/Admin/Admin";
 import { createAlbum } from "@/services/operations/Music/Music";
 import { albumType } from "@/types";
 import { useAuth } from "@clerk/clerk-react";
 import { Loader, Plus, Upload, X } from "lucide-react";
-import React, { useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const ButtonDialogForAlbums = () => {
   const [loading, setLoading] = useState<boolean>(false);

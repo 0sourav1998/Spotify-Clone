@@ -1,5 +1,4 @@
 import { HeadphonesIcon } from 'lucide-react';
-import React from 'react'
 
 export const LoginPrompt = () => (
 	<div className='h-full flex flex-col items-center justify-center p-6 text-center space-y-4'>

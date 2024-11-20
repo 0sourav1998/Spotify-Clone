@@ -1,6 +1,6 @@
 import apiConnector from "@/services/apiConnector";
 import { musicEndpoints } from "@/services/apis";
-import { Albums, Song, songType } from "@/types";
+import { Albums, Song } from "@/types";
 import toast from "react-hot-toast";
 
 const {

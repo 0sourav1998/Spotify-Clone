@@ -1,8 +1,8 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { signInOrSignUp } from "@/services/operations/Auth/Auth";
 import { useUser } from "@clerk/clerk-react";
 import { Loader } from "lucide-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthCallbackPage = () => {

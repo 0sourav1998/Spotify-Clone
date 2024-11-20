@@ -6,10 +6,9 @@ import { sendMessage } from "@/services/operations/messages/message";
 import { fetchUserById } from "@/services/operations/User/User";
 import { useAuth } from "@clerk/clerk-react";
 import { Loader, Send } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { io } from "socket.io-client";
 
 const ChatPage = () => {
   const { id } = useParams();

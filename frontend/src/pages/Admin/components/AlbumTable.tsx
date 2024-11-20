@@ -12,7 +12,7 @@ import { setAllAlbums } from "@/redux/slice/Admin/Admin";
 import { deleteAlbum } from "@/services/operations/Music/Music";
 import { useAuth } from "@clerk/clerk-react";
 import { Loader, Trash2 } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 

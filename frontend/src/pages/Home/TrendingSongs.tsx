@@ -3,7 +3,7 @@ import { RootState } from "@/main";
 import { setTrendingSongs } from "@/redux/slice/Music/Music";
 import { fetchTrendingSongs } from "@/services/operations/Music/Music";
 import { useAuth } from "@clerk/clerk-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AudioPlayerHomePage from "./Controller/AudioPlayerHomePage";
 

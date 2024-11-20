@@ -1,8 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle , CardHeader  } from "@/components/ui/card";
 import { CardContent } from "@mui/material";
-import { Music, Plus } from "lucide-react";
-import React from "react";
+import { Music } from "lucide-react";
 import SongTable from "./SongTable";
 import ButtonDialog from "./ButtonDialog";
 

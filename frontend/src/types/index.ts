@@ -34,7 +34,6 @@ export interface Stats {
   uniqueArtistCount: number;
 }
 
-
 export interface songType {
   title: string;
   artist: string;
@@ -46,16 +45,15 @@ export interface songType {
 export interface albumType {
   title: string;
   artist: string;
-  releaseYear : string;
+  releaseYear: string;
   image: File | null;
 }
 
-
 export interface Message {
-  _id : string ,
-  senderId : string ,
-  receiverId : string ,
-  message : string,
-  createdAt : string ,
-  updatedAt : string
+  _id: string;
+  senderId: { clerkId: string; imageUrl: string };
+  receiverId: string;
+  message: string;
+  createdAt: string;
+  updatedAt: string;
 }

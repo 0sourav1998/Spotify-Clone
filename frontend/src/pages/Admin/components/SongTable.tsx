@@ -13,7 +13,7 @@ import { setAllSongs } from "@/redux/slice/Admin/Admin";
 import { deleteSongs } from "@/services/operations/Music/Music";
 import { useAuth } from "@clerk/clerk-react";
 import { Calendar, Loader, Trash2 } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const SongTable = () => {

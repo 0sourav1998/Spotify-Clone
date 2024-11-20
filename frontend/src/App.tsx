@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import { setSocket } from "./redux/slice/chat/socket";
 import {
   updateOnlineUsers,
-  updateUserActivities,
 } from "./redux/slice/chat/chat";
 
 export default function App() {

@@ -1,5 +1,5 @@
-import { LayoutDashboardIcon, ToyBrick } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { LayoutDashboardIcon } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   SignedIn,

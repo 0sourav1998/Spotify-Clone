@@ -2,7 +2,6 @@ import { RootState } from '@/main'
 import { setCurrentSong, togglePlay } from '@/redux/slice/Music/PlayerStore'
 import { Song } from '@/types'
 import { Pause, Play } from 'lucide-react'
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const AudioPlayerHomePage = ({song} : {song : Song}) => {

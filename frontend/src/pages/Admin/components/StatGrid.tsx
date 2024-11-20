@@ -1,6 +1,5 @@
 import { RootState } from "@/main";
-import { Album, Music, Pencil, User, User2 } from "lucide-react";
-import React from "react";
+import { Album, Music, Pencil, User2 } from "lucide-react";
 import { useSelector } from "react-redux";
 
 const StatGrid = () => {

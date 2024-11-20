@@ -4,7 +4,6 @@ import { RootState } from "@/main";
 import {
   playNext,
   playPrevious,
-  setCurrentSong,
   setIsPlaying,
   togglePlay,
 } from "@/redux/slice/Music/PlayerStore";
@@ -15,12 +14,11 @@ import {
   Pause,
   Play,
   Repeat,
-  Shuffle,
   SkipBack,
   SkipForward,
   Volume,
 } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const PlaybackControls = () => {
@@ -152,7 +150,7 @@ const PlaybackControls = () => {
             max={duration || 100}
             step={1}
             className="w-full hover:cursor-grab active:cursor-grabbing"
-            onChange={(e, newValue) => handleSeek(newValue)}
+            onChange={(_, newValue) => handleSeek(newValue)}
           />
           <p className="text-xs text-zinc-400">{formatDuration(duration)}</p>
         </div>
@@ -177,7 +175,7 @@ const PlaybackControls = () => {
             size="small"
             defaultValue={70}
             value={volume}
-            onChange={(e, newValue) => handleVolume(newValue)}
+            onChange={(_, newValue) => handleVolume(newValue)}
             aria-label="Small"
             step={10}
             valueLabelDisplay="auto"

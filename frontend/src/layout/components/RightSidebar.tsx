@@ -9,7 +9,7 @@ import { User } from "@/types";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Music, Users } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
@@ -21,7 +21,6 @@ const RightSidebar = () => {
   const { user } = useUser();
   const location = useLocation();
   const { onlineUsers , selectedUser , userActivities  } = useSelector((state: RootState) => state.chat);
-  const {socket} = useSelector((state : RootState)=>state.socket)
   const {isPlaying} = useSelector((state:RootState)=>state.player)
 
 

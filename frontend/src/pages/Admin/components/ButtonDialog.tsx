@@ -12,9 +12,8 @@ import { setAllSongs } from "@/redux/slice/Admin/Admin";
 import { createSong } from "@/services/operations/Music/Music";
 import { songType } from "@/types";
 import { useAuth } from "@clerk/clerk-react";
-import { File, Loader, Plus, Upload, X } from "lucide-react";
-import React, { useRef, useState } from "react";
-import toast from "react-hot-toast";
+import { Loader, Plus, Upload, X } from "lucide-react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ButtonDialog = () => {

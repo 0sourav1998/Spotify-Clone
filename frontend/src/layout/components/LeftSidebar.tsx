@@ -4,7 +4,7 @@ import { setAlbums } from "@/redux/slice/Music/Music";
 import { fetchAllAlbums } from "@/services/operations/Music/Music";
 import { SignedIn } from "@clerk/clerk-react";
 import { Album, HomeIcon, Library, MessageCircle } from "lucide-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { RootState } from "@/main";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";

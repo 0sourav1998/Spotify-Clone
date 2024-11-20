@@ -1,5 +1,5 @@
 import { RootState } from "@/main";
-import React, { useDebugValue, useEffect, useState } from "react";
+import  { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/Header";
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
@@ -12,13 +12,11 @@ import {
   fetchAllSongs,
 } from "@/services/operations/Music/Music";
 import { fetchStats } from "@/services/operations/Stats/Stat";
-import { useAuth, useUser } from "@clerk/clerk-react";
-import { isUserAdminFunction } from "@/services/operations/User/User";
+import { useAuth } from "@clerk/clerk-react";
 import StatGrid from "./components/StatGrid";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
-  const { user } = useUser();
   const { getToken } = useAuth();
 
   const { isUserAdmin } = useSelector((state: RootState) => state.user);
