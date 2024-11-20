@@ -35,7 +35,7 @@ const MadeForYou = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-6 min-h-[25%]">
+    <div className="flex flex-col gap-4 p-6 min-h-[25%] pb-24">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-gray-50 font-bold text-3xl">Made For You</h1>
         <div className="text-gray-500 cursor-pointer hover:text-gray-300 text-sm transition-all duration-100 hover:underline">

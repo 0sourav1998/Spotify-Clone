@@ -66,6 +66,9 @@ const playerSlice = createSlice({
         state.isPlaying = false;
       }
     },
+    resetPlayState: (state) => {
+      state.isPlaying = false;
+    },
   },
 });
 
@@ -77,6 +80,7 @@ export const {
   playNext,
   setIsPlaying,
   playPrevious,
+  resetPlayState
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

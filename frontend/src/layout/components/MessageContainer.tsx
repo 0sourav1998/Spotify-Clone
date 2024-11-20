@@ -2,7 +2,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import useGetMessages from "@/hooks/useGetMessages";
 import useGetRealTimeMessages from "@/hooks/useGetRealTimeMessages";
 import { RootState } from "@/main";
-import { MessageCirclePlus, Timer } from "lucide-react";
+import { Loader, MessageCirclePlus, Timer } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -15,13 +15,22 @@ const MessageContainer = () => {
 
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
-  const { messages } = useSelector((state: RootState) => state.chat);
+  const { messages , loading } = useSelector((state: RootState) => state.chat);
 
   useEffect(()=>{
     if(scrollRef.current){
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight ; 
     }
   },[messages])
+
+
+  if(loading){
+    return (
+      <div className="flex w-full h-full items-center justify-center">
+        <Loader className="animate-spin text-green-900"/>
+      </div>
+    )
+  }
 
   return (
     <ScrollArea ref={scrollRef} className="bg-gray-900 rounded-md p-4 h-[95%]">

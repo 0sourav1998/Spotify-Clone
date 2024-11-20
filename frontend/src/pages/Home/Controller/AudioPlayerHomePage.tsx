@@ -17,7 +17,7 @@ const AudioPlayerHomePage = ({song} : {song : Song}) => {
   return (
     <div className='absolute bottom-4 right-3' onClick={handlePlayPause}>
         {
-            isPlaying && isCurrentSong ? (<Pause size={28} className='bg-blue-500 hidden group-hover:flex text-gray-50 rounded-md p-1.5'/>) : (<Play size={28} className='bg-blue-500 hidden group-hover:flex text-gray-50 rounded-md p-1.5'/>)
+            isPlaying && isCurrentSong ? (<Pause size={32} className='bg-blue-500 hidden group-hover:flex text-gray-50 rounded-md p-1.5'/>) : (<Play size={28} className='bg-blue-500 hidden group-hover:flex text-gray-50 rounded-md p-1.5'/>)
         }
     </div>
   )

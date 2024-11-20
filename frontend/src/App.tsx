@@ -13,11 +13,27 @@ import { setSocket } from "./redux/slice/chat/socket";
 import {
   updateOnlineUsers,
 } from "./redux/slice/chat/chat";
+import { Loader } from "lucide-react";
+import { resetPlayState } from "./redux/slice/Music/PlayerStore";
 
 export default function App() {
   const { user } = useUser();
   console.log(user);
   const dispatch = useDispatch();
+
+
+  if(!user){
+    return (
+      <div className="flex w-full h-screen items-center justify-center bg-black">
+        <Loader className="animate-spin text-green-900 size-12"/>
+      </div>
+    )
+  }
+
+  useEffect(() => {
+    dispatch(resetPlayState());
+  }, [dispatch])
+
 
   useEffect(() => {
     if (user) {

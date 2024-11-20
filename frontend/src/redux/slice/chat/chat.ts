@@ -9,7 +9,7 @@ interface initialStateType {
     userActivities : any[],
     messages : Message[] ,
     selectedUser : User | null,
-
+    loading : boolean
 }
 
 const initialState : initialStateType = {
@@ -19,13 +19,13 @@ const initialState : initialStateType = {
     userActivities : [],
     messages : [] ,
     selectedUser : null ,
+    loading : false ,
 }
 
 const chatSlice = createSlice({
     name : "chat",
     initialState ,
     reducers: {
-        
         setIsConnected(state, action: PayloadAction<boolean>) {
           state.isConnected = action.payload;
         },
@@ -41,8 +41,11 @@ const chatSlice = createSlice({
         updateUserActivities(state, action: PayloadAction<any[]>) {
           state.userActivities = action.payload;
         },
+        setLoading(state , action : PayloadAction<boolean>){
+          state.loading = action.payload ;
+        }
       },
 })
 
 export default chatSlice.reducer ;
-export const {setIsConnected,setSelectedUser,addMessage,updateOnlineUsers,updateUserActivities} = chatSlice.actions;
+export const {setIsConnected,setSelectedUser,addMessage,updateOnlineUsers,updateUserActivities,setLoading} = chatSlice.actions;
