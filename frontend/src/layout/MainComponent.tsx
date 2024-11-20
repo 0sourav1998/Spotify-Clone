@@ -3,14 +3,17 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import LeftSidebar from "./components/LeftSidebar";
 import RightSidebar from "./components/RightSidebar";
 import AudioPlayer from "./components/AudioPlayer";
 import PlaybackControls from "./components/PlaybackControls";
+import { useDispatch } from "react-redux";
+import { setIsPlaying } from "@/redux/slice/Music/PlayerStore";
 
 const MainComponent = () => {
+
   const isMobile = false;
   return (
     <div className="h-screen bg-black overflow-hidden">

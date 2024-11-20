@@ -33,10 +33,6 @@ export default function App() {
         console.log("onlineUsers",onlineUsers)
         dispatch(updateOnlineUsers(onlineUsers));
       });
-
-      socketConnection.on("user_activities", (updateActivities) => {
-        dispatch(updateUserActivities(updateActivities));
-      });
     }
   }, [user]);
   return (

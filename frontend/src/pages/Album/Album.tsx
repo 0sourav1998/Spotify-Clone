@@ -9,25 +9,28 @@ import { Button } from "@/components/ui/button";
 import { BarChart, BarChart2, Clock, Music, Music2Icon, Music3, Pause, Pipette, Play, PlayIcon } from "lucide-react";
 import { formatDate } from "@/lib/formatDate";
 import { playAlbum, togglePlay } from "@/redux/slice/Music/PlayerStore";
+import { useUser } from "@clerk/clerk-react";
+
 
 const Album = () => {
   const { id } = useParams<{id : string}>();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<Boolean>(false);
   const { singleAlbum } = useSelector((state: RootState) => state.music);
+  
+
+
   const { currentSong, isPlaying } = useSelector(
     (state: RootState) => state.player
   );
 
   const handlePlayAlbum = () => {
     if (!singleAlbum || !singleAlbum.songs) return;
-
     const isCurrentAlbumPlaying = singleAlbum?.songs?.some(
       (song) => song._id === currentSong?._id
     );
     if (isCurrentAlbumPlaying) dispatch(togglePlay());
     else {
-      // start playing the album from the beginning
       dispatch(playAlbum({ songs: singleAlbum.songs, startIndex: 0 }));
     }
   };

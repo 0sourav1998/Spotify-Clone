@@ -6,7 +6,7 @@ interface initialStateType {
     users : User[],
     isConnected : boolean ,
     onlineUsers : string[] ,
-    userActivities : Map<string,string>,
+    userActivities : any[],
     messages : Message[] ,
     selectedUser : User | null,
 
@@ -16,7 +16,7 @@ const initialState : initialStateType = {
     users : [] ,
     isConnected : false ,
     onlineUsers : [] ,
-    userActivities : new Map(),
+    userActivities : [],
     messages : [] ,
     selectedUser : null ,
 }
@@ -29,7 +29,7 @@ const chatSlice = createSlice({
         setIsConnected(state, action: PayloadAction<boolean>) {
           state.isConnected = action.payload;
         },
-        setSelectedUser(state, action: PayloadAction<User>) {
+        setSelectedUser(state, action: PayloadAction<User | null>) {
           state.selectedUser = action.payload;
         },
         addMessage(state, action: PayloadAction<Message[]>) {
@@ -38,7 +38,7 @@ const chatSlice = createSlice({
         updateOnlineUsers(state, action: PayloadAction<string[]>) {
           state.onlineUsers = action.payload;
         },
-        updateUserActivities(state, action: PayloadAction<Map<string, string>>) {
+        updateUserActivities(state, action: PayloadAction<any[]>) {
           state.userActivities = action.payload;
         },
       },

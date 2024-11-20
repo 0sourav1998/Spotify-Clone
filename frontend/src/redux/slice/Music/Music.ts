@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Albums , Song } from '@/types/index';
 
+
 interface MusicState{
     albums : Albums[],
     songs : Song[] ,

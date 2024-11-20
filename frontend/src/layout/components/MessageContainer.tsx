@@ -47,17 +47,17 @@ const MessageContainer = () => {
                     className="rounded-full size-12"
                   />
                 </div>
-                <div className="flex flex-col mb-4 gap-1 w-[30%]">
+                <div className="flex flex-col mb-6 gap-1 max-w-[45%] flex-wrap">
                   <div
-                    className={`text-gray-300 font-medium  rounded-lg  p-4 ${
+                    className={`w-full text-gray-300 font-medium rounded-lg break-words whitespace-normal p-2 ${
                       msg.senderId?.clerkId === id
                         ? "bg-blue-600 text-right"
                         : "bg-gray-700 text-left"
                     }`}
                   >
-                    <span className="pb-4">{msg.message}</span>
+                    <span className="pb-4 text-[10px]">{msg.message}</span>
                   </div>
-                  <span className="text-[8px] text-gray-200 flex items-center">
+                  <span className="text-[8px] gap-2 text-gray-200 flex items-center">
                     <Timer size={16} />
                     {timeAgo}
                   </span>

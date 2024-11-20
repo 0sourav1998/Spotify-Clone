@@ -28,16 +28,21 @@ export const initializeServer = (server) =>{
       console.log(`User Connected With User Id ${userId}`)
       userSocketsMap.set(userId, socket.id);
       userSocketActivity.set(userId, "Idle");
-      console.log(userSocketsMap,userSocketActivity)
+      console.log("Initially",userSocketsMap,userSocketActivity)
       io.emit("user_connected", userId);
       socket.emit("users_online", Array.from(userSocketsMap.keys()));
+      console.log(userSocketsMap.keys())
       io.emit("user_activities", Array.from(userSocketActivity.entries()));
       socket.userId = userId;
     });
   
     socket.on("update_activity", ({ userId, activity }) => {
+      console.log(activity,userId)
       userSocketActivity.set(userId, activity);
-      io.emit("updated_activity", { userId, activity });
+      console.log(userSocketActivity)
+      const activityArray = Array.from(userSocketActivity.entries());
+      io.emit("updated_activity", activityArray);
+      console.log("UPDATED ACTIVITY",activityArray)
     });
   
     socket.on("disconnect", () => {
