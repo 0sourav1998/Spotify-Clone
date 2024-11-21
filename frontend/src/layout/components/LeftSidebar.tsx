@@ -23,7 +23,7 @@ const LeftSidebar = () => {
   }, [fetchAlbums]);
   return (
     <div className="h-full flex flex-col gap-3 text-white">
-      <div className="bg-zinc-800 rounded-md p-4 gap-4 flex flex-col">
+      <div className="bg-zinc-800 rounded-md p-4 gap-4 flex flex-col items-center">
         <Link
           to={"/"}
           className="flex flex-row gap-4 hover:bg-zinc-900 transition-colors duration-300 p-2 rounded-md"
@@ -41,10 +41,10 @@ const LeftSidebar = () => {
           </Link>
         </SignedIn>
       </div>
-      <div className="flex-1 bg-zinc-800 rounded-md p-4 gap-4 flex flex-col">
-        <div className="flex gap-2 items-center">
-          <Library className="size-5" />
-          <p className="font-bold hidden md:flex">Playlists</p>
+      <div className="flex-1 bg-zinc-800 rounded-md md:p-4 md:gap-4 p-2 gap-2 flex flex-col">
+        <div className="flex gap-2 items-center  borer border-b p-1">
+          <Library className="size-5 mx-auto sm:mx-0" />
+          <p className="font-bold hidden sm:flex">Playlists</p>
         </div>
         <ScrollArea className="h-[calc(100vh-300px)]">
           <div className="space-y-2">
@@ -55,11 +55,11 @@ const LeftSidebar = () => {
             ) : (
               albums?.map((album) => (
                 <Link to={`/album/${album._id}`} key={album._id}>
-                  <div className="flex gap-4 items-center shadow-md hover:bg-zinc-900 rounded-md p-4 transition-all duration-200">
-                    <img src={album?.imageUrl} className="size-16 rounded-md" />
-                    <div className="flex flex-col gap-2 items-center">
-                      <p className="font-bold">{album?.title.length > 15 ? album.title.substring(0,15) + "..." : album.title}</p>
-                      <p className="font-semibold text-gray-400">Artist : {album?.artist.length > 10 ? album.artist.substring(0,10) + "..." : album.artist}</p>
+                  <div className="flex md:flex-row flex-col mb-3 md:gap-4 gap-1.5 items-center md:shadow-md hover:bg-zinc-900 rounded-md md:p-4 p-1 transition-all duration-200">
+                    <img src={album?.imageUrl} className="md:size-16 size-full rounded-md object-cover aspect-square md:object-none md:aspect-auto" />
+                    <div className=" hidden md:flex flex-col gap-2 items-center">
+                      <p className="md:font-bold font-normal">{album?.title.length > 15 ? album.title.substring(0,15) + "..." : album.title}</p>
+                      <p className="md:font-semibold font-light text-gray-400">Artist : {album?.artist.length > 10 ? album.artist.substring(0,10) + "..." : album.artist}</p>
                     </div>
                   </div>
                 </Link>

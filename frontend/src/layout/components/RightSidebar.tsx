@@ -70,7 +70,7 @@ const RightSidebar = () => {
     dispatch(setSelectedUser(null))
   },[location.pathname,dispatch])
   return (
-    <div className="h-screen bg-zinc-900 rounded-lg shadow-lg flex flex-col p-4 space-y-4">
+    <div className="h-screen bg-zinc-900 rounded-lg shadow-lg flex-col p-4 space-y-4">
       <div className="flex items-center justify-between p-2 border-b border-zinc-800">
         <div className="flex items-center gap-2 text-gray-300">
           <Users className="text-xl" />

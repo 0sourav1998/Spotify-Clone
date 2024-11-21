@@ -50,6 +50,8 @@ export default function App() {
       });
     }
   }, [user]);
+
+  
   return (
     <Routes>
       <Route

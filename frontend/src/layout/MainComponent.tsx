@@ -16,13 +16,14 @@ const MainComponent = () => {
     <div className="h-screen bg-black overflow-hidden">
       <ResizablePanelGroup
         direction="horizontal"
-        className="h-full overflow-hidden flex-1 flex p-2"
+        className="h-full overflow-hidden flex-1 flex md:p-2 p-1"
       >
         <AudioPlayer />
         <ResizablePanel
           defaultSize={20}
           minSize={isMobile ? 0 : 10}
           maxSize={30}
+          className="mr-1"
         >
           <LeftSidebar />
         </ResizablePanel>
@@ -36,6 +37,7 @@ const MainComponent = () => {
           minSize={isMobile ? 0 : 10}
           maxSize={25}
           collapsedSize={0}
+          className="hidden md:flex"
         >
           <p className="text-white">
             <RightSidebar />

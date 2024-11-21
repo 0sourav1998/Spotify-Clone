@@ -35,15 +35,15 @@ const MadeForYou = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-6 min-h-[25%] pb-24">
+    <div className="flex flex-col gap-4 p-6 min-h-[25%] md:pb-24 pb-56">
       <div className="flex flex-row justify-between items-center">
-        <h1 className="text-gray-50 font-bold text-3xl">Made For You</h1>
+        <h1 className="text-gray-50 font-bold md:text-3xl text-xl">Made For You</h1>
         <div className="text-gray-500 cursor-pointer hover:text-gray-300 text-sm transition-all duration-100 hover:underline">
           See all
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6bg-gray-800 bg-opacity-80 ">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6bg-gray-800 bg-opacity-80 ">
         {madeForYouSongs?.map((song) => (
           <div
             key={song._id}

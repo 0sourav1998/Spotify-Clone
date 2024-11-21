@@ -37,10 +37,10 @@ const Topbar = () => {
   const isAdmin: boolean = isUserAdmin;
 
   return (
-    <div className="w-[99%] mx-auto rounded-md p-3 flex  justify-between items-center gap-4 border border-gray-700 bg-zinc-800/75 text-bold font-bold">
+    <div className="md:w-[99%] w-full mx-auto rounded-md p-3 flex  justify-between items-center gap-4 border border-gray-700 bg-zinc-800/75 text-bold font-bold">
       <div className="flex flex-row gap-1 items-center">
-        <img src={spotify} className="size-7" />
-        <div className="text-white shadow-sm ml-1 text-xl">Spotify</div>
+        <img src={spotify} className="size-7 md:size-4" />
+        <div className="text-white shadow-sm ml-1 md:text-xl text-lg">Spotify</div>
       </div>
       <div className="flex items-center gap-4">
         {isAdmin && (

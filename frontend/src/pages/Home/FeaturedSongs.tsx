@@ -37,33 +37,36 @@ const FeaturedSongs = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6 px-6 py-4 min-h-[30%]">
+    <div className="flex flex-col gap-6 md:px-6 px-2 lg:py-4 py-1 min-h-[30%]">
       <div className="flex flex-row justify-between items-center">
         <div>
-          <h1 className="font-extrabold text-4xl text-gray-50">
+          <h1 className="md:font-extrabold font-bold md:text-4xl text-xl text-gray-50">
             Good Afternoon
           </h1>
-          <p className="text-gray-400 text-sm mt-1">
+          <p className="text-gray-400 md:text-sm text-xs mt-1 hidden md:flex">
             Here are some tunes to get you going
           </p>
         </div>
-        <div className="text-gray-500 cursor-pointer hover:text-gray-300 text-sm transition-all duration-100 hover:underline">See all</div>
+        <div className="text-gray-500 cursor-pointer hover:text-gray-300 md:text-sm text-[10px] transition-all duration-100 hover:underline">See all</div>
       </div>
 
-      <div className="relative grid sm:grid-cols-2 md:grid-cols-3 gap-6 cursor-pointer">
+      <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 cursor-pointer">
         {featuredSongs?.map((song) => (
           <div
             key={song._id}
-            className="flex group items-center gap-4 p-4 bg-gray-800 bg-opacity-60 rounded-md transition-all duration-300 transform hover:scale-105 hover:bg-opacity-80 shadow-lg"
+            className="flex md:flex-row flex-col group items-center gap-4 p-4 bg-gray-800 bg-opacity-60 rounded-md transition-all duration-300 transform hover:scale-105 hover:bg-opacity-80 shadow-lg"
           >
             <img
               src={song.imageUrl}
               alt={song.title}
-              className="w-16 h-16 rounded-md shadow-md"
+              className="md:w-16 md:h-16 size-fit aspect-square object-cover md:aspect-auto md:object-none rounded-md shadow-md"
             />
             <div className="flex flex-col text-gray-50">
-              <span className="font-semibold text-lg truncate">
+              <span className="font-semibold text-lg truncate hidden lg:flex">
                 {song.title.length > 15 ? song.title.substring(0,15) + "..." : song.title}
+              </span>
+              <span className="font-semibold text-lg truncate flex lg:hidden">
+                {song.title.length > 10 ? song.title.substring(0,10) + "..." : song.title}
               </span>
               <span className="font-medium text-sm text-gray-400 truncate">
                 {song.artist.length > 15 ? song.artist.substring(0,15) + "..." : song.artist}
