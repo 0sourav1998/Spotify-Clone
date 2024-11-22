@@ -10,13 +10,10 @@ import { BarChart2, Clock, Pause, Play } from "lucide-react";
 import { formatDate } from "@/lib/formatDate";
 import { playAlbum, togglePlay } from "@/redux/slice/Music/PlayerStore";
 
-
 const Album = () => {
-  const { id } = useParams<{id : string}>();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const { singleAlbum } = useSelector((state: RootState) => state.music);
-  
-
 
   const { currentSong, isPlaying } = useSelector(
     (state: RootState) => state.player
@@ -39,7 +36,7 @@ const Album = () => {
   };
 
   const fetchAlbum = async () => {
-    if(!id) return ;
+    if (!id) return;
     try {
       const result = await fetchSingleAlbum(id);
       dispatch(setSingleAlbum(result));
@@ -47,18 +44,24 @@ const Album = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (id) {
       fetchAlbum();
     }
   }, [id]);
+
   return (
-    <div className="h-full">
-      <ScrollArea className="h-full rounded-md">
+    <ScrollArea className="h-full">
+      <div className="h-full rounded-md">
         <div className="absolute min-h-screen inset-0 bg-gradient-to-b from-[#5038a0] via-zinc-900/80 to-zinc-900" />
-        <div className="relative z-10">
+        <div className="relative max-h-[85vh] z-10">
           <div className="flex gap-6 p-6 pb-8">
-            <img src={singleAlbum?.imageUrl} className="h-60 w-60 rounded-md" />
+            <img
+              src={singleAlbum?.imageUrl}
+              alt={singleAlbum?.title}
+              className="h-60 w-60 rounded-md"
+            />
             <div className="flex flex-col justify-end">
               <p className="text-gray-200">Album</p>
               <h1 className="text-7xl text-gray-200">{singleAlbum?.title}</h1>
@@ -74,7 +77,8 @@ const Album = () => {
               onClick={handlePlayAlbum}
               className="size-14 bg-blue-500 hover:bg-blue-700 transition-all duration-300 ml-6 rounded-full hover:scale-110"
             >
-              {isPlaying && singleAlbum?.songs &&
+              {isPlaying &&
+              singleAlbum?.songs &&
               singleAlbum?.songs.some(
                 (song) => song._id === currentSong?._id
               ) ? (
@@ -85,70 +89,63 @@ const Album = () => {
             </Button>
           </div>
           <div className="bg-gradient-to-t from-zinc-800 to-zinc-950 shadow-md">
-            <div className="grid grid-cols-[16px_4fr_2fr_1fr] mt-5 p-4 border-white/5">
-              <div className="text-zinc-400 pr-4">#</div>
+            <div className="grid grid-cols-[10%_30%_30%_20%_10%] mt-5 p-4 border-white/5">
+              <div className="text-zinc-400 text-center">#</div>
               <div className="text-zinc-400">Title</div>
-              <div className="text-zinc-400">Release date</div>
-              <div className="text-zinc-400">
-                <Clock className="size-4" />
+              <div className="text-zinc-400">Artist</div>
+              <div className="text-zinc-400 text-center">Release Date</div>
+              <div className="text-zinc-400 text-center">
+                <Clock className="size-4 inline-block" />
               </div>
             </div>
-            <div className="">
-              <div className="space-y-2">
-                {singleAlbum?.songs?.length === 0 ? (
-                  <p className="text-gray-200 text-xl w-full p-3">
-                    No Songs Found in this Album
-                  </p>
-                ) : (
-                  singleAlbum?.songs?.map((song, index) => {
-                    const isCurrentSong = currentSong?._id === song._id;
-                    return (
-                      <div
-                        onClick={() => handlePlaySong(index)}
-                        key={song._id}
-                        className="w-full grid grid-cols-[16px_4fr_2fr_1fr] gap-4 text-sm group text-zinc-400 hover:bg-white/5 rounded-sm cursor-pointer p-4 transition-all duration-300"
-                      >
-                        <div className="flex items-center justify-center">
+            <ScrollArea className="border border-slate-950 h-[178px] overflow-auto">
+              {singleAlbum?.songs?.length === 0 ? (
+                <p className="text-gray-200 text-xl w-full p-3">
+                  No Songs Found in this Album
+                </p>
+              ) : (
+                singleAlbum?.songs?.map((song, index) => {
+                  const isCurrentSong = currentSong?._id === song._id;
+                  return (
+                    <div
+                      onClick={() => handlePlaySong(index)}
+                      key={song._id}
+                      className="grid grid-cols-[10%_30%_30%_20%_10%] text-sm group text-zinc-400 hover:bg-white/5 rounded-sm cursor-pointer p-4 transition-all duration-300 items-center"
+                    >
+                      <div className="flex items-center justify-center text-center">
+                        {isCurrentSong && isPlaying ? (
+                          <BarChart2 className="h-4 w-4 text-green-500 animate-pulse" />
+                        ) : (
                           <span className="group-hover:hidden">
-                            {isCurrentSong && isPlaying ? (
-                              <div className="size-4 text-green-500"><BarChart2 className="animate-pulse"/></div>
-                            ) : (
-                              <span className="group-hover:hidden">
-                                {index + 1}
-                              </span>
-                            )}
+                            {index + 1}
                           </span>
-                          {!isCurrentSong && (
-                            <Play className="h-4 w-4 hidden group-hover:block" />
-                          )}
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <img
-                            src={song.imageUrl}
-                            className="size-10 rounded-md"
-                            alt={song.title}
-                          />
-                          <div>
-                            <span>{song.title}</span>
-                            <span>{song.artist}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center">
-                          {song.createdAt.split("T")[0]}
-                        </div>
-                        <div className="flex items-center">
-                          {formatDate(song.duration)}
-                        </div>
+                        )}
+                        {!isCurrentSong && (
+                          <Play className="h-4 w-4 hidden group-hover:block" />
+                        )}
                       </div>
-                    );
-                  })
-                )}
-              </div>
-            </div>
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={song.imageUrl}
+                          className="h-10 w-10 rounded-md"
+                          alt={song.title}
+                        />
+                        <span className="truncate">{song.title}</span>
+                      </div>
+                      <div className="truncate">{song.artist}</div>
+                      <div className="text-center">
+                        {song.createdAt.split("T")[0]}
+                      </div>
+                      <div className="text-center">{formatDate(song.duration)}</div>
+                    </div>
+                  );
+                })
+              )}
+            </ScrollArea>
           </div>
         </div>
-      </ScrollArea>
-    </div>
+      </div>
+    </ScrollArea>
   );
 };
 

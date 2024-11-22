@@ -17,18 +17,9 @@ import { Loader } from "lucide-react";
 import { resetPlayState } from "./redux/slice/Music/PlayerStore";
 
 export default function App() {
-  const { user } = useUser();
+  const { user , isLoaded } = useUser();
   console.log(user);
   const dispatch = useDispatch();
-
-
-  if(!user){
-    return (
-      <div className="flex w-full h-screen items-center justify-center bg-black">
-        <Loader className="animate-spin text-green-900 size-12"/>
-      </div>
-    )
-  }
 
   useEffect(() => {
     dispatch(resetPlayState());
@@ -50,6 +41,16 @@ export default function App() {
       });
     }
   }, [user]);
+
+  if(!user){
+    return (
+      <div className="h-screen w-screen flex items-center justify-center bg-black">
+        <Loader className="animate-spin text-green-700" size={48}/>
+      </div>
+    )
+  }
+
+
 
   
   return (

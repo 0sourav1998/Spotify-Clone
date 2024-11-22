@@ -39,17 +39,17 @@ const Topbar = () => {
   return (
     <div className="md:w-[99%] w-full mx-auto rounded-md p-3 flex  justify-between items-center gap-4 border border-gray-700 bg-zinc-800/75 text-bold font-bold">
       <div className="flex flex-row gap-1 items-center">
-        <img src={spotify} className="size-7 md:size-4" />
+        <img src={spotify} className="size-4 md:size-7" />
         <div className="text-white shadow-sm ml-1 md:text-xl text-lg">Spotify</div>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center md:gap-4 gap-2">
         {isAdmin && (
           <Link
             to="/admin"
-            className="flex gap-2 items-center justify-center bg-gray-900 hover:bg-gray-950 transition-all duration-300 rounded-md border-gray-200 p-2"
+            className="flex gap-2 items-center justify-center bg-gray-900 hover:bg-gray-950 transition-all duration-300 rounded-md border-gray-200 md:p-2 p-2"
           >
-            <LayoutDashboardIcon className="w-5 h-5 mr-2 text-white" />
-            <h1 className="text-gray-50">Admin Dashboard</h1>
+            <LayoutDashboardIcon className="w-5 h-5 mr-2 text-white hidden md:flex" />
+            <p className="text-gray-400 md:text-lg text-[8px]">Admin Dashboard</p>
           </Link>
         )}
         <SignedOut>

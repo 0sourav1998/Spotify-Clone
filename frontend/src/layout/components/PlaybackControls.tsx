@@ -90,33 +90,48 @@ const PlaybackControls = () => {
   };
 
   return (
-    <footer className="flex items-center justify-between w-full bg-zinc-950 shadow-md p-4 sticky bottom-0 z-10">
-      <div className="min-w-[14%]">
+    <footer className="flex sm:flex-row flex-col sm:items-center justify-between w-full bg-zinc-950 shadow-md md:p-2 p-3 sticky bottom-0 z-10">
+      <div className="p-1 flex items-center justify-center shadow-md shadow-white mb-4 sm:mb-0 sm:shadow-none">
         {currentSong && (
-          <div className="flex flex-row p-2 gap-4">
-            <img src={currentSong.imageUrl} className="size-12 rounded-md" />
+          <div className="flex flex-row items-center p-2 gap-4 min-w-[60%]">
+            <img src={currentSong.imageUrl} className="md:size-12 size-10 rounded-md" />
             <div className="flex flex-col">
-              <div className="text-gray-200 text-xl font-semibold">
+              <div className="text-gray-200 md:text-xl text-sm font-semibold">
                 {currentSong.title}
               </div>
-              <p className="text-gray-500 text-sm">{currentSong.artist}</p>
+              <p className="text-gray-500 md:text-sm text-xs">{currentSong.artist}</p>
             </div>
           </div>
         )}
+        <div className="flex sm:hidden items-center gap-2 w-full justify-start">
+          <Button variant={"ghost"}>
+            <Volume className="text-gray-200 hover:scale-105 transition-all duration-200" />
+          </Button>
+          <Slider
+            size="small"
+            defaultValue={70}
+            value={volume}
+            onChange={(_, newValue) => handleVolume(newValue)}
+            aria-label="Small"
+            step={10}
+            valueLabelDisplay="auto"
+            className="w-full"
+          />
+        </div>
       </div>
-      <div className="flex flex-col gap-2 items-center">
-        <div className="flex gap-4 items-center">
+      <div className="flex flex-row sm:flex-col gap-4 items-center">
+        <div className="flex sm:gap-4 gap-1.5 items-center">
           <Button
             onClick={repeatSong}
             disabled={!currentSong}
-            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200"
+            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200 size-8 sm:size-12"
             variant={"ghost"}
           >
             <Repeat className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
           <Button
             disabled={!currentSong}
-            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200"
+            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200 size-8 sm:size-12"
             variant={"ghost"}
             onClick={() => dispatch(playPrevious())}
           >
@@ -124,7 +139,7 @@ const PlaybackControls = () => {
           </Button>
           <Button
             disabled={!currentSong}
-            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200"
+            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200 size-8 sm:size-12"
             variant={"ghost"}
             onClick={() => dispatch(togglePlay())}
           >
@@ -136,7 +151,7 @@ const PlaybackControls = () => {
           </Button>
           <Button
             disabled={!currentSong}
-            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200"
+            className="bg-gray-800 hover:bg-gray-900 transition-all duration-200 size-8 sm:size-12"
             variant={"ghost"}
             onClick={() => dispatch(playNext())}
           >
@@ -156,7 +171,7 @@ const PlaybackControls = () => {
         </div>
       </div>
       <div className="flex flex-col gap-2 mr-2 min-w-[10%]">
-        <div>
+        <div className="hidden md:flex">
         <Button variant={"ghost"}>
             <Mic2 className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
@@ -167,7 +182,7 @@ const PlaybackControls = () => {
             <Laptop2 className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="hidden sm:flex items-center gap-2 w-full justify-start">
           <Button variant={"ghost"}>
             <Volume className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>

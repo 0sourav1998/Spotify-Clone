@@ -9,7 +9,8 @@ interface initialStateType {
     userActivities : any[],
     messages : Message[] ,
     selectedUser : User | null,
-    loading : boolean
+    loading : boolean ,
+    switchToChat : boolean
 }
 
 const initialState : initialStateType = {
@@ -20,6 +21,7 @@ const initialState : initialStateType = {
     messages : [] ,
     selectedUser : null ,
     loading : false ,
+    switchToChat : false ,
 }
 
 const chatSlice = createSlice({
@@ -43,9 +45,12 @@ const chatSlice = createSlice({
         },
         setLoading(state , action : PayloadAction<boolean>){
           state.loading = action.payload ;
+        } ,
+        setSwitchToChat(state,action : PayloadAction<boolean>){
+          state.switchToChat = action.payload ;
         }
       },
 })
 
 export default chatSlice.reducer ;
-export const {setIsConnected,setSelectedUser,addMessage,updateOnlineUsers,updateUserActivities,setLoading} = chatSlice.actions;
+export const {setIsConnected,setSelectedUser,addMessage,updateOnlineUsers,updateUserActivities,setLoading,setSwitchToChat} = chatSlice.actions;

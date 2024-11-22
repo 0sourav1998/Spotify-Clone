@@ -8,10 +8,24 @@ import LeftSidebar from "./components/LeftSidebar";
 import RightSidebar from "./components/RightSidebar";
 import AudioPlayer from "./components/AudioPlayer";
 import PlaybackControls from "./components/PlaybackControls";
+import { useSelector } from "react-redux";
+import { RootState } from "@/main";
+import { useEffect, useState } from "react";
 
 const MainComponent = () => {
+  const { switchToChat } = useSelector((state: RootState) => state.chat);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const isMobile = false;
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="h-screen bg-black overflow-hidden">
       <ResizablePanelGroup
@@ -19,14 +33,25 @@ const MainComponent = () => {
         className="h-full overflow-hidden flex-1 flex md:p-2 p-1"
       >
         <AudioPlayer />
-        <ResizablePanel
-          defaultSize={20}
-          minSize={isMobile ? 0 : 10}
-          maxSize={30}
-          className="mr-1"
-        >
-          <LeftSidebar />
-        </ResizablePanel>
+        {isMobile && switchToChat ? (
+          <ResizablePanel
+            defaultSize={20}
+            minSize={10}
+            maxSize={30}
+            collapsedSize={0}
+          >
+            <RightSidebar />
+          </ResizablePanel>
+        ) : (
+          <ResizablePanel
+            defaultSize={20}
+            minSize={10}
+            maxSize={30}
+            className="mr-1"
+          >
+            <LeftSidebar />
+          </ResizablePanel>
+        )}
         <ResizableHandle />
         <ResizablePanel defaultSize={isMobile ? 80 : 60}>
           <Outlet />
@@ -34,10 +59,10 @@ const MainComponent = () => {
         <ResizableHandle />
         <ResizablePanel
           defaultSize={20}
-          minSize={isMobile ? 0 : 10}
-          maxSize={25}
+          minSize={10}
+          maxSize={30}
           collapsedSize={0}
-          className="hidden md:flex"
+          className="hidden lg:block"
         >
           <p className="text-white">
             <RightSidebar />
