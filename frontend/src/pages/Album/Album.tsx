@@ -56,15 +56,15 @@ const Album = () => {
       <div className="h-full rounded-md">
         <div className="absolute min-h-screen inset-0 bg-gradient-to-b from-[#5038a0] via-zinc-900/80 to-zinc-900" />
         <div className="relative max-h-[85vh] z-10">
-          <div className="flex gap-6 p-6 pb-8">
+          <div className="flex flex-col sm:flex-row items-center md:gap-6 gap-4 md:p-6 p-5 md:pb-8 pb-2">
             <img
               src={singleAlbum?.imageUrl}
               alt={singleAlbum?.title}
-              className="h-60 w-60 rounded-md"
+              className="sm:h-60 sm:w-60 h-40 w-full rounded-md"
             />
             <div className="flex flex-col justify-end">
               <p className="text-gray-200">Album</p>
-              <h1 className="text-7xl text-gray-200">{singleAlbum?.title}</h1>
+              <h1 className="text-2xl sm:text-2xl md:text-5xl font-semibold xl:text-7xl md:font-bold text-gray-200">{singleAlbum?.title}</h1>
               <div className="flex flex-row gap-4 text-gray-200 font-medium text-sm mt-4">
                 <span>{singleAlbum?.artist}</span>
                 <span> • {singleAlbum?.songs?.length} Songs</span>
@@ -89,12 +89,12 @@ const Album = () => {
             </Button>
           </div>
           <div className="bg-gradient-to-t from-zinc-800 to-zinc-950 shadow-md">
-            <div className="grid grid-cols-[10%_30%_30%_20%_10%] mt-5 p-4 border-white/5">
+            <div className="grid md:grid-cols-[10%_30%_30%_20%_10%] grid-cols-[5%_40%_30%_15%] mt-5 p-4 gap-2 border-white/5 font-bold">
               <div className="text-zinc-400 text-center">#</div>
               <div className="text-zinc-400">Title</div>
               <div className="text-zinc-400">Artist</div>
-              <div className="text-zinc-400 text-center">Release Date</div>
-              <div className="text-zinc-400 text-center">
+              <div className="text-zinc-400 text-center md:flex hidden">Release Date</div>
+              <div className="text-zinc-400 text-center md:text-left">
                 <Clock className="size-4 inline-block" />
               </div>
             </div>
@@ -110,7 +110,7 @@ const Album = () => {
                     <div
                       onClick={() => handlePlaySong(index)}
                       key={song._id}
-                      className="grid grid-cols-[10%_30%_30%_20%_10%] text-sm group text-zinc-400 hover:bg-white/5 rounded-sm cursor-pointer p-4 transition-all duration-300 items-center"
+                      className="grid md:grid-cols-[10%_30%_30%_20%_10%] grid-cols-[5%_40%_30%_15%] md:text-sm text-xs group text-zinc-400 hover:bg-white/5 rounded-sm cursor-pointer transition-all gap-2 duration-300 items-center py-3 px-1.5 sm:p-4"
                     >
                       <div className="flex items-center justify-center text-center">
                         {isCurrentSong && isPlaying ? (
@@ -127,16 +127,16 @@ const Album = () => {
                       <div className="flex items-center gap-3">
                         <img
                           src={song.imageUrl}
-                          className="h-10 w-10 rounded-md"
+                          className="h-10 w-10 rounded-md hidden sm:flex"
                           alt={song.title}
                         />
                         <span className="truncate">{song.title}</span>
                       </div>
                       <div className="truncate">{song.artist}</div>
-                      <div className="text-center">
+                      <div className="text-center md:flex hidden">
                         {song.createdAt.split("T")[0]}
                       </div>
-                      <div className="text-center">{formatDate(song.duration)}</div>
+                      <div className="text-center md:text-left">{formatDate(song.duration)}</div>
                     </div>
                   );
                 })

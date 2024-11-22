@@ -96,12 +96,12 @@ const RightSidebar = () => {
     <div
       className={`h-screen ${
         switchToChat ? "flex" : "hidden"
-      } md:flex bg-zinc-900 rounded-lg shadow-lg flex-col md:p-4 p-0 md:space-y-4 space-y-1`}
+      } md:flex bg-zinc-900 rounded-lg shadow-lg flex-col lg:p-2 p-0 md:space-y-4 space-y-1`}
     >
       <div className="flex flex-col gap-4 w-full items-center justify-between p-2 border-b border-zinc-800">
-        <div className="flex items-center md:gap-4 gap-2 text-gray-300">
-          <Users className="md:text-xl text-xs" />
-          <h2 className="md:text-lg text-[10px] font-semibold">
+        <div className="flex items-center lg:gap-2 gap-2 text-gray-300 mt-2">
+          <Users className="lg:size-6 size-4" />
+          <h2 className="lg:text-[14px] text-[10px] font-semibold">
             Currently Listening
           </h2>
         </div>

@@ -182,7 +182,7 @@ const PlaybackControls = () => {
             <Laptop2 className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
         </div>
-        <div className="hidden sm:flex items-center gap-2 w-full justify-start">
+        <div className="hidden sm:flex flex-col md:flex-row items-center gap-0.5 w-full justify-start ">
           <Button variant={"ghost"}>
             <Volume className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>

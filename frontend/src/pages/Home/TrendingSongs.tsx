@@ -44,7 +44,7 @@ const TrendingSongs = () => {
       </div>
 
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         initial={{ x: -50, opacity: 0, scale: 0.9 }}
         animate={{ x: 0, opacity: 1, scale: 1 }}
         transition={{

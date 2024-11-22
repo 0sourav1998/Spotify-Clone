@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { setSwitchToChat } from "@/redux/slice/chat/chat";
+import { motion } from "framer-motion";
 
 const LeftSidebar = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,9 @@ const LeftSidebar = () => {
 
   return (
     <div
-      className={`h-full ${switchToChat ? "hidden" : "flex"} md:flex flex-col gap-2 text-white`}
+      className={`h-full ${
+        switchToChat ? "hidden" : "flex"
+      } md:flex flex-col gap-2 text-white`}
     >
       <div className="bg-zinc-800 rounded-md xl:p-4 p-2 xl:gap-4 gap-2 flex flex-col">
         <Link
@@ -80,7 +83,15 @@ const LeftSidebar = () => {
             ) : (
               albums?.map((album) => (
                 <Link to={`/album/${album._id}`} key={album._id}>
-                  <div className="flex xl:flex-row flex-col mb-3 xl:gap-3 gap-1.5 items-center md:shadow-md hover:bg-zinc-900 rounded-md xl:p-4 p-1 transition-all duration-200">
+                  <motion.div
+                    className="flex xl:flex-row flex-col mb-3 xl:gap-3 gap-1.5 items-center md:shadow-md hover:bg-zinc-900 rounded-md xl:p-4 p-1 transition-all duration-200"
+                    initial={{ x: -50, opacity: 0, scale: 0.8 }}
+                    animate={{ x: 0, opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.5,
+                      ease: "easeInOut",
+                    }}
+                  >
                     <img
                       src={album?.imageUrl}
                       className="xl:size-16 size-full rounded-md object-cover aspect-square xl:object-cover xl:aspect-auto"
@@ -92,12 +103,13 @@ const LeftSidebar = () => {
                           : album.title}
                       </p>
                       <p className="xl:font-semibold font-light text-gray-400">
-                        Artist: {album?.artist.length > 10
+                        Artist:{" "}
+                        {album?.artist.length > 10
                           ? album.artist.substring(0, 10) + "..."
                           : album.artist}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 </Link>
               ))
             )}
