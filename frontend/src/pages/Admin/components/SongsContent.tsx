@@ -6,17 +6,17 @@ import ButtonDialog from "./ButtonDialog";
 
 const SongsContent = () => {
   return (
-    <Card className="bg-zinc-800/80 p-8 w-full">
+    <Card className="bg-zinc-800/80 md:p-8 p-3 w-full">
       <CardHeader>
         <div className="flex justify-between items-center">
           <div>
-            <CardTitle className="flex gap-1 mb-1">
-              <div className="flex gap-2 text-gray-100">
-                <Music className="size-5 text-green-700"/>
-                Songs Library
+            <CardTitle className="flex items-center gap-1 mb-1">
+              <div className="flex items-center md:gap-2 gap-1 text-gray-100">
+                <Music className="md:size-5 size-3 text-green-700"/>
+                <span className="md:text-xl text-sm">Songs Library</span>
               </div>
             </CardTitle>
-            <CardDescription className="text-gray-400">Manage Your Music Library</CardDescription>
+            <CardDescription className="text-gray-400 md:text-lg text-xs">Manage Your Music Library</CardDescription>
           </div>
           <ButtonDialog/>
         </div>

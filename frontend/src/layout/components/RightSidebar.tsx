@@ -101,7 +101,7 @@ const RightSidebar = () => {
       <div className="flex flex-col gap-4 w-full items-center justify-between p-2 border-b border-zinc-800">
         <div className="flex items-center lg:gap-2 gap-2 text-gray-300 mt-2">
           <Users className="lg:size-6 size-4" />
-          <h2 className="lg:text-[14px] text-[10px] font-semibold">
+          <h2 className="lg:text-[14px] text-[8px] sm:10px md:12px font-semibold">
             Currently Listening
           </h2>
         </div>
@@ -153,8 +153,8 @@ const RightSidebar = () => {
                   <div
                     className={`${
                       isOnline(user)
-                        ? "bg-blue-900 absolute rounded-full bottom-1 -right-0.5 size-3"
-                        : "bg-zinc-600 absolute rounded-full bottom-1 -right-0.5 size-3"
+                        ? "bg-blue-900 absolute rounded-full bottom-0.5 md:bottom-1 -right-0.5 sm:-right-1 md:size-3 size-1.5 sm:size-2"
+                        : "bg-zinc-600 absolute rounded-full bottom-0.5 -right-0.5 md:bottom-1 sm:-right-1 md:size-3 size-1.5 sm:size-2"
                     }`}
                   ></div>
                 </div>

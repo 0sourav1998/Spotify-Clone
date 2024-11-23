@@ -35,9 +35,9 @@ const StatGrid = () => {
     },
   ];
   return (
-    <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-2">
+    <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-2">
       {statDetails.map((details) => (
-        <div className="p-8 bg-gray-900 rounded-md flex items-center gap-6" key={details.id}>
+        <div className="p-4 sm:p-6 md:p-8 bg-gray-900 rounded-md flex items-center gap-6" key={details.id}>
             <div className={`${details.background} p-2 w-fit shadow-md rounded-md`}>{details.icon}</div>
             <div className="flex gap-2">
                 <span>{details.title} : </span>

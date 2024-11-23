@@ -49,10 +49,10 @@ const SongTable = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Title</TableHead>
-          <TableHead>Artist</TableHead>
-          <TableHead>Release Date</TableHead>
-          <TableHead className="text-right">Action</TableHead>
+          <TableHead><span className="text-xs md:text-sm lg:text-lg">Title</span></TableHead>
+          <TableHead className="hidden sm:table-cell"><span className="text-xs md:text-sm lg:text-lg">Artist</span></TableHead>
+          <TableHead className="hidden md:table-cell"><span className="text-xs md:text-sm lg:text-lg">Release Year</span></TableHead>
+          <TableHead className="text-right"><span className="text-xs md:text-sm lg:text-lg">Actions</span></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -64,13 +64,16 @@ const SongTable = () => {
             >
               <TableCell className="flex gap-2 items-center">
                 <img src={song.imageUrl} className="size-10 rounded-md" />
-                <span>{song.title}</span>
+                <span className="text-xs md:text-sm lg:text-lg">{song.title}</span>
               </TableCell>
-              <TableCell>{song.artist}</TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
+              <TableCell className="hidden sm:table-cell"><span className="text-xs md:text-sm lg:text-lg">{song.artist}</span></TableCell>
+              <TableCell className="hidden md:table-cell">
+                <div>
+                  <div className="flex items-center gap-2">
+
                   <Calendar />
-                  {song.createdAt.split("T")[0]}
+                  <span className="text-xs md:text-sm lg:text-lg">{song.createdAt.split("T")[0]}</span>
+                  </div>
                 </div>
               </TableCell>
               <TableCell className="text-right">

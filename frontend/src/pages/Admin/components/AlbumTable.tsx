@@ -42,11 +42,12 @@ const AlbumTable = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Title</TableHead>
-          <TableHead>Artist</TableHead>
-          <TableHead>Release Year</TableHead>
-          <TableHead>Songs</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
+          <TableHead><span className="text-xs md:text-sm lg:text-lg">Title</span></TableHead>
+          <TableHead className="hidden sm:table-cell">
+            <span className="text-xs md:text-sm lg:text-lg">Artist</span></TableHead>
+          <TableHead className="hidden md:table-cell"><span className="text-xs md:text-sm lg:text-lg">Release Year</span></TableHead>
+          <TableHead className="hidden md:table-cell"><span className="text-xs md:text-sm lg:text-lg">Songs</span></TableHead>
+          <TableHead className="text-right"><span className="text-xs md:text-sm lg:text-lg">Actions</span></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -55,11 +56,11 @@ const AlbumTable = () => {
             <TableRow key={album._id}>
               <TableCell className="flex gap-2 items-center">
                 <img src={album.imageUrl} className="size-12 rounded-md" />
-                <span>{album.title}</span>
+                <span className="text-xs md:text-sm lg:text-lg">{album.title}</span>
               </TableCell>
-              <TableCell>{album.artist}</TableCell>
-              <TableCell>{album.releaseYear}</TableCell>
-              <TableCell>{album.songs?.length} Songs</TableCell>
+              <TableCell className="hidden sm:table-cell"><span className="text-xs md:text-sm lg:text-lg">{album.artist}</span></TableCell>
+              <TableCell className="hidden md:table-cell"><span className="text-xs md:text-sm lg:text-lg">{album.releaseYear}</span></TableCell>
+              <TableCell className="hidden md:table-cell"><span className="text-xs md:text-sm lg:text-lg">{album.songs?.length}</span> Songs</TableCell>
               <TableCell className="text-right">
                 <Button
                   onClick={() => deleteAlbumFunc(album._id as string)}

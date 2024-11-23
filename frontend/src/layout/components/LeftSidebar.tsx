@@ -3,19 +3,27 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { setAlbums } from "@/redux/slice/Music/Music";
 import { fetchAllAlbums } from "@/services/operations/Music/Music";
 import { SignedIn } from "@clerk/clerk-react";
-import { Album, HomeIcon, Library, MessageCircle } from "lucide-react";
-import { useEffect } from "react";
+import { Album, HomeIcon, Library, MessageCircle, Plus } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { RootState } from "@/main";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { setSwitchToChat } from "@/redux/slice/chat/chat";
 import { motion } from "framer-motion";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const LeftSidebar = () => {
   const dispatch = useDispatch();
   const { albums } = useSelector((state: RootState) => state.music);
   const { switchToChat } = useSelector((state: RootState) => state.chat);
+  const imageRef = useRef<HTMLInputElement | null>(null);
   const isLoading = false;
 
   const fetchAlbums = async () => {
@@ -66,9 +74,44 @@ const LeftSidebar = () => {
       </div>
 
       <div className="max-h-[70%] bg-zinc-800 rounded-md md:p-4 p-2 gap-2 flex flex-col">
-        <div className="flex gap-2 items-center border-b border-b-slate-600 p-2">
-          <Library className="size-5 mx-auto sm:mx-0" />
-          <p className="font-bold hidden sm:flex">Playlists</p>
+        <div className="flex flex-row justify-between items-center border-b border-b-slate-600 p-2">
+          <div className="flex gap-2 items-center">
+            <Library className="size-5 mx-auto sm:mx-0" />
+            <p className="font-bold hidden sm:flex">Playlists</p>
+          </div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="cursor-pointer hover:bg-gray-800 transition-all duration-300 rounded-md p-2 shadow-md hover:shadow-lg">
+                <Plus className="text-white" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="bg-gray-950 text-gray-50 rounded-lg shadow-lg p-6 md:w-1/2 w-full">
+              <DialogHeader className="text-lg font-semibold mb-2">
+                Create Your Playlist
+              </DialogHeader>
+              <DialogDescription className="text-sm text-gray-400 mb-4">
+                Add a custom playlist to organize your favorite songs.
+              </DialogDescription>
+              <div className="flex flex-col gap-6">
+                <input type="file" ref={imageRef} className="hidden" />
+                <div className="bg-gray-800 border border-dashed border-gray-600 p-6 flex flex-col justify-center items-center w-full rounded-lg transition-all duration-300 hover:bg-gray-700">
+                  <Button
+                    className="bg-blue-600 text-white w-fit px-6 py-2 rounded-md shadow hover:bg-blue-700 transition-all"
+                    onClick={() => imageRef.current?.click()}
+                  >
+                    Choose A File
+                  </Button>
+                </div>
+                <input
+                  className="p-3 w-full rounded-md bg-gray-800 border border-gray-700 focus-within:ring-2 focus-within:ring-blue-600 outline-none text-gray-200 placeholder:text-gray-400 shadow-sm"
+                  placeholder="Enter Playlist Title"
+                />
+              </div>
+              <Button className="mt-6 bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded-md shadow-lg hover:shadow-xl transition-all text-center">
+                Add Playlist
+              </Button>
+            </DialogContent>
+          </Dialog>
         </div>
 
         <ScrollArea className="h-[calc(100vh-300px)]">
