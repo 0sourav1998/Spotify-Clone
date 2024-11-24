@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true ,
         unique : true 
-    }
+    },
+    playlists : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Playlist"
+    }]
 },{timestamps : true});
 
 const User = mongoose.model("User",userSchema);

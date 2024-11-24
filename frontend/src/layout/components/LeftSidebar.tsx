@@ -3,27 +3,21 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { setAlbums } from "@/redux/slice/Music/Music";
 import { fetchAllAlbums } from "@/services/operations/Music/Music";
 import { SignedIn } from "@clerk/clerk-react";
-import { Album, HomeIcon, Library, MessageCircle, Plus } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { Album, ArrowBigDown, ArrowDown, HomeIcon, Library, MessageCircle, Plus } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { RootState } from "@/main";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { setSwitchToChat } from "@/redux/slice/chat/chat";
 import { motion } from "framer-motion";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import AddPlaylist from "./AddPlaylist";
 
 const LeftSidebar = () => {
   const dispatch = useDispatch();
   const { albums } = useSelector((state: RootState) => state.music);
   const { switchToChat } = useSelector((state: RootState) => state.chat);
-  const imageRef = useRef<HTMLInputElement | null>(null);
+  const[openPlaylist,setOpenPlaylist] = useState(false)
   const isLoading = false;
 
   const fetchAlbums = async () => {
@@ -79,42 +73,18 @@ const LeftSidebar = () => {
             <Library className="size-5 mx-auto sm:mx-0" />
             <p className="font-bold hidden sm:flex">Playlists</p>
           </div>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="cursor-pointer hover:bg-gray-800 transition-all duration-300 rounded-md p-2 shadow-md hover:shadow-lg">
-                <Plus className="text-white" />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="bg-gray-950 text-gray-50 rounded-lg shadow-lg p-6 md:w-1/2 w-full">
-              <DialogHeader className="text-lg font-semibold mb-2">
-                Create Your Playlist
-              </DialogHeader>
-              <DialogDescription className="text-sm text-gray-400 mb-4">
-                Add a custom playlist to organize your favorite songs.
-              </DialogDescription>
-              <div className="flex flex-col gap-6">
-                <input type="file" ref={imageRef} className="hidden" />
-                <div className="bg-gray-800 border border-dashed border-gray-600 p-6 flex flex-col justify-center items-center w-full rounded-lg transition-all duration-300 hover:bg-gray-700">
-                  <Button
-                    className="bg-blue-600 text-white w-fit px-6 py-2 rounded-md shadow hover:bg-blue-700 transition-all"
-                    onClick={() => imageRef.current?.click()}
-                  >
-                    Choose A File
-                  </Button>
-                </div>
-                <input
-                  className="p-3 w-full rounded-md bg-gray-800 border border-gray-700 focus-within:ring-2 focus-within:ring-blue-600 outline-none text-gray-200 placeholder:text-gray-400 shadow-sm"
-                  placeholder="Enter Playlist Title"
-                />
-              </div>
-              <Button className="mt-6 bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded-md shadow-lg hover:shadow-xl transition-all text-center">
-                Add Playlist
-              </Button>
-            </DialogContent>
-          </Dialog>
+          <AddPlaylist />
         </div>
-
         <ScrollArea className="h-[calc(100vh-300px)]">
+          <div className="cursor-pointer hover:bg-gray-950 rounded-md shadow-md p-3 transition-all duration-200">
+            <div className="flex justify-between mb-2" onClick={()=>setOpenPlaylist((prev)=>!prev)}>
+              <p className="text-left">My Playlists</p>
+              <ArrowDown/>
+            </div>
+            <div className={`${openPlaylist ? "flex" : "hidden"} w-[90%] mx-auto`}>
+              Hello
+            </div>
+          </div>
           <div className="space-y-2">
             {isLoading ? (
               <PlaylistSkeleton />

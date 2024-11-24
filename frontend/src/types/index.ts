@@ -57,3 +57,17 @@ export interface Message {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Playlist {
+  _id : string ,
+  owner : string ,
+  title : string ,
+  imageUrl : string ,
+  songs ?: Song[] ,
+}
+
+export interface bodyType {
+  owner : string ,
+  title : string ,
+  imageUrl : string 
+}

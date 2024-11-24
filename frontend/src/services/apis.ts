@@ -33,3 +33,10 @@ export const messageEndpoints = {
     GET_ALL : `${BASE_URL}/message/allMessages/:id`,
     SEND_MESSAGE : `${BASE_URL}/message/send`
 }
+
+export const playlistEndpoints = {
+    CREATE_PLAYLIST : `${BASE_URL}/playlist/createPlaylist`,
+    DELETE_PLAYLIST : `${BASE_URL}/playlist/:id`,
+    GET_SINGLE : `${BASE_URL}/playlist/get/:id`,
+    GET_ALL : `${BASE_URL}/all`
+}
