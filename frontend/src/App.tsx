@@ -15,6 +15,7 @@ import {
 } from "./redux/slice/chat/chat";
 import { Loader } from "lucide-react";
 import { resetPlayState } from "./redux/slice/Music/PlayerStore";
+import {Playlist} from "./pages/Playlist/Playlist";
 
 export default function App() {
   const { user , isLoaded } = useUser();
@@ -42,15 +43,6 @@ export default function App() {
     }
   }, [user]);
 
-  if(!user){
-    return (
-      <div className="h-screen w-screen flex items-center justify-center bg-black">
-        <Loader className="animate-spin text-green-700" size={48}/>
-      </div>
-    )
-  }
-
-
 
   
   return (
@@ -69,6 +61,7 @@ export default function App() {
         <Route index element={<Homepage />} />
         <Route path="/chat/:id" element={<ChatPage />} />
         <Route path="/album/:id" element={<Album />} />
+        <Route path="/playlist/:id" element={<Playlist/>}/>
       </Route>
       <Route />
     </Routes>

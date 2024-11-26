@@ -97,7 +97,7 @@ const PlaybackControls = () => {
             <img src={currentSong.imageUrl} className="md:size-12 size-10 rounded-md" />
             <div className="flex flex-col">
               <div className="text-gray-200 md:text-xl text-sm font-semibold">
-                {currentSong.title}
+                {currentSong.title.length > 10 ? currentSong.title.substring(0,10) + "..." : currentSong.title}
               </div>
               <p className="text-gray-500 md:text-sm text-xs">{currentSong.artist}</p>
             </div>
@@ -182,7 +182,7 @@ const PlaybackControls = () => {
             <Laptop2 className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
         </div>
-        <div className="hidden sm:flex flex-col md:flex-row items-center gap-0.5 w-full justify-start ">
+        <div className="hidden sm:flex flex-col md:flex-row items-center gap-0.5 w-full justify-end">
           <Button variant={"ghost"}>
             <Volume className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>

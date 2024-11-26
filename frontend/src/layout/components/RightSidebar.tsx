@@ -119,14 +119,19 @@ const RightSidebar = () => {
             <Search className="size-3 md:size-5" />
           </Button>
         </div>
-        <div className="flex lg:hidden justify-center p-1 w-full bg-green-800 rounded-md">
-          <Button
-            className="transition-all duration-300 text-gray-100 text-center"
-            variant={"ghost"}
-            onClick={() => dispatch(setSwitchToChat(false))}
-          >
-             <span className="text-[8px]">Switch To Normal</span>
-          </Button>
+        <div className="flex lg:hidden justify-center p-1 w-full">
+          <label className="relative flex gap-2 items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={!switchToChat}
+              onChange={() => dispatch(setSwitchToChat(!switchToChat))}
+              className="sr-only peer"
+            />
+            <div className="w-4 h-4 bg-blue-900 peer-focus:outline-none peer-focus:ring-2 rounded-full"></div>
+            <span className="text-xs font-medium text-gray-300">
+              {switchToChat ? "Normal" : "Chat"}
+            </span>
+          </label>
         </div>
       </div>
 

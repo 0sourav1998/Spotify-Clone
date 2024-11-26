@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Albums , Song } from '@/types/index';
+import { Albums , Playlist, Song } from '@/types/index';
 
 
 interface MusicState{
@@ -8,7 +8,9 @@ interface MusicState{
     singleAlbum : Albums | null ,
     featuredSongs : Song[],
     madeForYouSongs : Song[],
-    trendingSongs : Song[] 
+    trendingSongs : Song[] ,
+    allPlaylists : Playlist[] ,
+    singlePlaylist : Playlist | null
 }
 
 const initialState : MusicState = {
@@ -18,7 +20,8 @@ const initialState : MusicState = {
     featuredSongs : [] ,
     madeForYouSongs : [] ,
     trendingSongs : [] ,
-
+    allPlaylists : [],
+    singlePlaylist : null
 }
 const musicSlice = createSlice({
     name : "music",
@@ -41,10 +44,16 @@ const musicSlice = createSlice({
         } ,
         setMadeForYouSongs : (state,action)=>{
             state.madeForYouSongs = action.payload
+        } ,
+        setAllPlaylists : (state,action)=>{
+            state.allPlaylists = action.payload ;
+        } ,
+        setSinglePlaylist : (state,action)=>{
+            state.singlePlaylist = action.payload
         }
     }
 });
 
-export const {setAlbums,setSongs,setSingleAlbum,setFeaturedSongs,setMadeForYouSongs,setTrendingSongs} = musicSlice.actions;
+export const {setAlbums,setSongs,setSingleAlbum,setFeaturedSongs,setMadeForYouSongs,setTrendingSongs,setAllPlaylists,setSinglePlaylist} = musicSlice.actions;
 
 export default musicSlice.reducer ;

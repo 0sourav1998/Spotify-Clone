@@ -1,28 +1,47 @@
 import PlaylistSkeleton from "@/components/skeletons/PlaylistSkeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { setAlbums } from "@/redux/slice/Music/Music";
+import { setAlbums, setAllPlaylists } from "@/redux/slice/Music/Music";
 import { fetchAllAlbums } from "@/services/operations/Music/Music";
-import { SignedIn } from "@clerk/clerk-react";
-import { Album, ArrowBigDown, ArrowDown, HomeIcon, Library, MessageCircle, Plus } from "lucide-react";
+import { SignedIn, useAuth } from "@clerk/clerk-react";
+import {
+  Album,
+  ArrowBigDown,
+  ArrowDown,
+  HomeIcon,
+  Library,
+  MessageCircle,
+  Plus,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { RootState } from "@/main";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { setSwitchToChat } from "@/redux/slice/chat/chat";
 import { motion } from "framer-motion";
 import AddPlaylist from "./AddPlaylist";
+import { allPlayLists } from "@/services/operations/Playlist/Playlist";
 
 const LeftSidebar = () => {
   const dispatch = useDispatch();
-  const { albums } = useSelector((state: RootState) => state.music);
+  const navigate = useNavigate();
+  const { albums, allPlaylists } = useSelector(
+    (state: RootState) => state.music
+  );
   const { switchToChat } = useSelector((state: RootState) => state.chat);
-  const[openPlaylist,setOpenPlaylist] = useState(false)
+  const [openPlaylist, setOpenPlaylist] = useState(false);
   const isLoading = false;
+  const { getToken } = useAuth();
 
   const fetchAlbums = async () => {
     const albums = await fetchAllAlbums();
     dispatch(setAlbums(albums));
+  };
+
+  const fetchPlaylists = async () => {
+    const token = await getToken();
+    const playlists = await allPlayLists(token as string);
+    dispatch(setAllPlaylists(playlists));
   };
 
   const handleSwitchToChat = () => {
@@ -32,6 +51,10 @@ const LeftSidebar = () => {
   useEffect(() => {
     fetchAlbums();
   }, [fetchAlbums]);
+
+  useEffect(() => {
+    fetchPlaylists();
+  }, [allPlaylists]);
 
   return (
     <div
@@ -56,14 +79,19 @@ const LeftSidebar = () => {
             <p className="hidden md:flex">Message</p>
           </Link>
         </SignedIn>
-        <div className="flex lg:hidden justify-center p-1 w-full bg-green-800 rounded-md">
-          <Button
-            onClick={handleSwitchToChat}
-            className="transition-all duration-300 text-gray-100 text-center"
-            variant={"ghost"}
-          >
-            <span className="text-[8px]">Switch to Chat Mode</span>
-          </Button>
+        <div className="flex lg:hidden justify-center p-1 w-full">
+          <label className="relative flex items-center cursor-pointer gap-2">
+            <input
+              type="checkbox"
+              checked={!switchToChat}
+              onChange={() => dispatch(setSwitchToChat(!switchToChat))}
+              className="sr-only peer"
+            />
+            <div className="w-4 h-4 bg-green-900 peer-focus:outline-none peer-focus:ring-2 rounded-full"></div>
+            <span className="text-xs font-medium text-gray-300">
+              {switchToChat ? "Normal" : "Chat"}
+            </span>
+          </label>
         </div>
       </div>
 
@@ -76,15 +104,51 @@ const LeftSidebar = () => {
           <AddPlaylist />
         </div>
         <ScrollArea className="h-[calc(100vh-300px)]">
-          <div className="cursor-pointer hover:bg-gray-950 rounded-md shadow-md p-3 transition-all duration-200">
-            <div className="flex justify-between mb-2" onClick={()=>setOpenPlaylist((prev)=>!prev)}>
-              <p className="text-left">My Playlists</p>
-              <ArrowDown/>
+          <ScrollArea className="cursor-pointer rounded-md shadow-md p-1 mb-2 bg-gradient-to-r from-blue-950 to-green-900 transition-all duration-300 max-h-72">
+            <div
+              className="flex justify-between items-center rounded-md hover:bg-gray-800 transition-all duration-200"
+              onClick={() => setOpenPlaylist((prev) => !prev)}
+            >
+              <p className="text-left text-gray-200 md:text-sm text-xs font-semibold md:p-2 p-1">
+                My Playlists
+              </p>
+              <ArrowDown
+                className={`transition-transform ${
+                  openPlaylist ? "rotate-180" : "rotate-0"
+                } hidden md:flex`}
+              />
             </div>
-            <div className={`${openPlaylist ? "flex" : "hidden"} w-[90%] mx-auto`}>
-              Hello
+
+            <div
+              className={`${
+                openPlaylist ? "flex flex-col gap-2" : "hidden"
+              } w-[90%] mx-auto mt-3 mb-3`}
+            >
+              {allPlaylists?.length !== 0 ? (
+                allPlaylists?.map((playlist) => (
+                  <div
+                  onClick={()=>navigate(`/playlist/${playlist._id}`)}
+                    key={playlist._id}
+                    className="flex items-center gap-4 bg-blue-950 shadow-md shadow-blue-800 p-2 rounded-md hover:shadow-md hover:bg-gray-950 transition-all duration-200"
+                  >
+                    <div className="w-6 h-6 bg-gray-600 rounded-full  hidden md:flex justify-center items-center text-gray-400">
+                      <img
+                        src={playlist.imageUrl || "/placeholder.png"}
+                        alt="Playlist"
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                    <p className="text-gray-200 text-sm font-medium truncate">
+                      {playlist.title}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-400 text-center">No Playlist Found</p>
+              )}
             </div>
-          </div>
+          </ScrollArea>
+
           <div className="space-y-2">
             {isLoading ? (
               <PlaylistSkeleton />

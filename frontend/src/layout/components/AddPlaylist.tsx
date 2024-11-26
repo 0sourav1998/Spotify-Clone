@@ -61,11 +61,11 @@ const AddPlaylist = () => {
           <Plus className="text-white" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-gray-950 text-gray-50 rounded-lg shadow-lg p-6 md:w-1/2 w-full">
-        <DialogHeader className="text-lg font-semibold mb-2">
+      <DialogContent className="bg-gray-950 text-gray-50 rounded-lg shadow-lg md:p-6 p-3 md:w-1/2 w-full">
+        <DialogHeader className="md:text-lg text-sm font-semibold mb-2">
           Create Your Playlist
         </DialogHeader>
-        <DialogDescription className="text-sm text-gray-400 mb-4">
+        <DialogDescription className="md:text-sm text-xs text-gray-400 md:mb-4 mb-2">
           Add a custom playlist to organize your favorite songs.
         </DialogDescription>
         <div className="flex flex-col gap-6">

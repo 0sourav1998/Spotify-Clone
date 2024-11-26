@@ -81,11 +81,11 @@ const ChatPage = () => {
         </div>
       </div>
 
-      <div className="h-[65vh] overflow-auto p-4">
+      <div className="h-[65vh] overflow-auto md:p-4 p-0">
         <MessageContainer />
       </div>
 
-      <div className="w-full p-4 absolute bottom-12 bg-gray-800 flex items-center gap-2 border-t border-zinc-700">
+      <div className="w-full md:p-4 p-0 absolute md:bottom-12 bottom-20 bg-gray-800 flex items-center gap-2 border-t border-zinc-700">
         <input
           placeholder="Enter Your Message..."
           value={message}
