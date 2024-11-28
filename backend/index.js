@@ -20,7 +20,7 @@ import { initializeServer } from "./socket/socket.js";
 import http from "http"
 
 app.use(cors({
-  origin: ["https://spotify-clone-2-ygpc.onrender.com" ],
+  origin: "*" ,
   credentials: true,
 }));
 
