@@ -15,41 +15,33 @@ const AudioPlayer = () => {
   const { user } = useUser();
   const dispatch = useDispatch();
 
-  // Handle play/pause logic
+
   useEffect(() => {
     if (isPlaying) {
       audioRef.current?.play();
       if (isPlaying && socket && user?.id) {
-        console.log("Emitting user activity...");
         socket.emit(
           "update_activity",
           { userId: user?.id, activity: `Listening to ${currentSong?.title}` },
-          (response: any) => {
-            console.log("Emit acknowledgment:", response);
-          }
         );
       }
     } else {
       audioRef.current?.pause();
-      console.log("Emitting user activity...");
       if (socket) {
         socket.emit(
           "update_activity",
           { userId: user?.id, activity: `Idle` },
-          (response: any) => {
-            console.log("Emit acknowledgment:", response);
-          }
         );
       }
     }
   }, [isPlaying]);
 
-  // Handle song ends
+
   useEffect(() => {
     const audio = audioRef.current;
 
     const handleEnded = () => {
-      dispatch(playNext()); // Dispatch the playNext action
+      dispatch(playNext());
     };
 
     audio?.addEventListener("ended", handleEnded);
@@ -57,7 +49,7 @@ const AudioPlayer = () => {
     return () => audio?.removeEventListener("ended", handleEnded);
   }, [dispatch]);
 
-  // Handle song changes
+
   useEffect(() => {
     if (!audioRef.current || !currentSong) return;
 
@@ -70,13 +62,9 @@ const AudioPlayer = () => {
       prevSongRef.current = currentSong?.audioUrl;
       if (isPlaying) audio.play();
       if (isPlaying && socket && user?.id) {
-        console.log("Emitting user activity...");
         socket.emit(
           "update_activity",
           { userId: user?.id, activity: `Listening to ${currentSong?.title}` },
-          (response: any) => {
-            console.log("Emit acknowledgment:", response);
-          }
         );
       }
     }

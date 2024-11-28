@@ -25,7 +25,6 @@ const TopBar = () => {
   const fetchIsAdminOrNot = async () => {
     const token = await getToken();
     const res = await isUserAdminFunction(token);
-    console.log(res)
     dispatch(setUserIsAdmin(res));
   };
 

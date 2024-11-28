@@ -51,7 +51,6 @@ export const fetchFeaturedSongs = async (token: string | null): Promise<Song[]> 
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("RESPONSE",res)
     if (res?.data?.success) {
       result = res.data.songs;
     }

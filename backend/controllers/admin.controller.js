@@ -25,7 +25,6 @@ export const createSong = async (req, res) => {
       process.env.CLOUDINARY_FOLDER
     );
     const { title, artist, duration, albumId } = req.body;
-    console.log(duration,typeof duration)
     const newSong = await Song.create({
       title,
       artist,
@@ -59,7 +58,6 @@ export const createSong = async (req, res) => {
 export const deleteSong = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id)
     if (!id) {
       return res.status(400).json({
         success: false,
@@ -73,7 +71,6 @@ export const deleteSong = async (req, res) => {
         message: "Song Not Found",
       });
     }
-    console.log(song)
     if (song.albumId) {
       await Album.findByIdAndUpdate(song.albumId, {
         $pull: { songs: song._id },
@@ -98,7 +95,6 @@ export const createAlbum = async (req,res) => {
   try {
     const { title, artist, releaseYear } = req.body;
     const image = req.files.imageUrl;
-    console.log(title,artist,releaseYear,image)
     if (!title || !artist || !releaseYear || !image) {
       return res.status(400).json({
         success: false,
@@ -109,7 +105,6 @@ export const createAlbum = async (req,res) => {
       image,
       process.env.CLOUDINARY_FOLDER
     );
-    console.log(imageFromCloudinary)
     if (!imageFromCloudinary) {
       return res.status(400).json({
         success: false,

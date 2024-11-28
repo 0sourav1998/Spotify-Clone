@@ -29,24 +29,23 @@ const PlaybackControls = () => {
       time = Math.floor(time);
       let minutes = Math.floor(time / 60);
       let seconds = time % 60;
-      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`; // Ensures seconds are always two digits
+      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`; 
     } else {
-      return `0:${time < 10 ? "0" : ""}${time}`; // Handles cases where time is less than 10 seconds
+      return `0:${time < 10 ? "0" : ""}${time}`; 
     }
   };
 
   const { isPlaying, currentSong } = useSelector(
     (state: RootState) => state.player
   );
-  const [volume, setVolume] = useState<number>(50); // Default volume set to 50
+  const [volume, setVolume] = useState<number>(50);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
 
   let audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Ensure volume updates correctly
+
   const handleVolume = (value: number | number[]) => {
-    console.log(value);
     if (audioRef.current && typeof value === "number") {
       audioRef.current.volume = value / 100;
       setVolume(value);
@@ -83,9 +82,9 @@ const PlaybackControls = () => {
 
   const repeatSong = () => {
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // Restart the song
+      audioRef.current.currentTime = 0;
       dispatch(setIsPlaying())
-      audioRef.current.play(); // Play it again
+      audioRef.current.play();
     }
   };
 

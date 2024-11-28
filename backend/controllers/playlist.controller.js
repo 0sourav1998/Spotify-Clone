@@ -44,7 +44,6 @@ export const createPlaylist = async (req, res) => {
       newPlaylist,
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(400).json({
       success: false,
       message: "Something Went Wrong While Creating Playlist",
@@ -54,7 +53,6 @@ export const createPlaylist = async (req, res) => {
 
 export const deletePlaylist = async (req, res) => {
   try {
-    console.log("here")
     const { playlistId } = req.body;
     const userId = req.auth.userId;
     if (!playlistId || !userId) {
@@ -71,7 +69,6 @@ export const deletePlaylist = async (req, res) => {
       deletedPlaylist,
     });
   } catch (error) {
-    console.log(error.message)
     return res.status(400).json({
       success: false,
       message: "Something Went Wrong While Deleting Playlist",
@@ -92,7 +89,6 @@ export const getAllPlaylist = async (req, res) => {
       allPlaylists,
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(400).json({
       success: false,
       message: "Something Went Wrong While Fetching Playlists",
@@ -102,7 +98,6 @@ export const getAllPlaylist = async (req, res) => {
 
 export const fetchSinglePlaylist = async (req, res) => {
   try {
-    console.log("here")
     const { playlistId } = req.body;
     if (!playlistId) {
       return res.status(400).json({
@@ -157,9 +152,7 @@ export const addOrRemoveSong = async (req, res) => {
         message: "Playlist Not Found",
       });
     }
-    console.log("here3")
-    console.log(playlist.title)
-
+    
     const alreadyExists = playlist.songs.includes(song._id);
     if (alreadyExists) {
       await Playlist.findByIdAndUpdate(playlist._id, {

@@ -26,7 +26,6 @@ export const isUserAdminFunction = async(token : any) : Promise<any>=>{
         const res = await apiConnector({method : "GET" , url :  IS_ADMIN, headers : {
             Authorization : `Bearer ${token}`
         }});
-        console.log(res)
         if(res){
             result = res.data.admin;
         }
@@ -47,7 +46,6 @@ export const fetchUserById = async(id : any , token : string)=>{
                 Authorization : `Bearer ${token}` 
             }
         })
-        console.log("Res",res)
         if(res && res.data.success){
             result = res.data.user ;
         }

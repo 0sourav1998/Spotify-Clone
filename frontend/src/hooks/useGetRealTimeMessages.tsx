@@ -10,7 +10,6 @@ const useGetRealTimeMessages = () => {
   
   useEffect(() => {
     socket?.on("send_message", (message) => {
-      console.log("MESSAGES",message);
       dispatch(addMessage([...messages, message]));
     });
   }, [socket, dispatch, messages]);

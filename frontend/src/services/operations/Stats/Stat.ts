@@ -15,7 +15,6 @@ export const fetchStats = async(token:string)=>{
       });
       if(response && response.data.success){
         result = response.data ;
-        console.log(result)
       }
     } catch (error) {
       console.log(error)

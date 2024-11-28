@@ -18,7 +18,6 @@ const AuthCallbackPage = () => {
         imageUrl: user?.imageUrl,
       };
       const res = await signInOrSignUp(obj);
-      console.log("Res",res)
       navigate("/")
     }
   };

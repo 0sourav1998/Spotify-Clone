@@ -46,7 +46,6 @@ const LeftSidebar = () => {
       const token = await getToken();
       const result = await deletePlaylist(id, token as string);
       if (result) {
-        console.log(result);
         const updatedPlaylists = allPlaylists.filter((playlist) => {
           playlist._id !== result._id;
         });

@@ -62,7 +62,6 @@ const RightSidebar = () => {
     const result = users.filter((user) => {
       return user.name.toLowerCase().startsWith(search.toLowerCase());
     });
-    console.log(result);
     setFilteredUser(result);
   };
 

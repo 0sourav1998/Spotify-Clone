@@ -84,7 +84,6 @@ export const fetchSinglePlaylist = async(id : string ,token : string)=>{
             }
         })
         if(res && res.data.success){
-            console.log("res",res)
             result = res.data.singlePlaylist
         }
     } catch (error : any) {

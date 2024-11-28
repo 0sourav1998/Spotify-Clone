@@ -13,13 +13,11 @@ import { setSocket } from "./redux/slice/chat/socket";
 import {
   updateOnlineUsers,
 } from "./redux/slice/chat/chat";
-import { Loader } from "lucide-react";
 import { resetPlayState } from "./redux/slice/Music/PlayerStore";
 import {Playlist} from "./pages/Playlist/Playlist";
 
 export default function App() {
-  const { user , isLoaded } = useUser();
-  console.log(user);
+  const { user  } = useUser();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,7 +35,6 @@ export default function App() {
       });
 
       socketConnection.on("users_online", (onlineUsers) => {
-        console.log("onlineUsers",onlineUsers)
         dispatch(updateOnlineUsers(onlineUsers));
       });
     }

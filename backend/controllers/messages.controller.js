@@ -9,9 +9,6 @@ export const sendMessage = async (req, res) => {
     try {
       const { receiverId, message } = req.body;
       const senderId = req.auth.userId ;
-
-      console.log(senderId,receiverId,message);
-  
       if (!senderId || !receiverId || !message) {
         return res.status(400).json({
           success: false,
@@ -22,12 +19,11 @@ export const sendMessage = async (req, res) => {
       const sender = await User.findOne({clerkId : senderId});
       const receiver = await User.findOne({clerkId : receiverId})
   
-      // Find existing conversation
       let gotConversation = await Conversation.findOne({
         participants: { $all: [sender._id, receiver._id] },
       });
   
-      // If no conversation exists, create a new one
+
       if (!gotConversation) {
         gotConversation = await Conversation.create({
           participants: [sender._id, receiver._id],
@@ -50,9 +46,7 @@ export const sendMessage = async (req, res) => {
       await gotConversation.save();
   
       const receiverSocketId = await getReceiverSocketId(receiverId);
-      console.log(receiverSocketId)
       if (receiverSocketId) {
-        console.log("Socket Working",receiverSocketId)
         io.to(receiverSocketId).emit("send_message", populatedMessage);
       }
   
@@ -73,7 +67,6 @@ export const sendMessage = async (req, res) => {
 
 export const getAllMessage = async (req, res) => {
   try {
-    console.log("here")
     const senderId = req.auth.userId;
     const { id } = req.params;
     const sender = await User.findOne({clerkId : senderId});
@@ -93,7 +86,6 @@ export const getAllMessage = async (req, res) => {
         });
       }
 
-    console.log(conversation.messages);
     return res.status(200).json({
       success: true,
       message: "Messages Fetched Successfully",

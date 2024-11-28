@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="w-full flex justify-between items-center py-4 px-6 bg-gradient-to-r from-blue-800 via-blue-900 to-green-900 shadow-lg rounded-md mb-4">
-      {/* Logo Section */}
         <Link to={"/"} className="flex items-center gap-3">
           <img
             src={spotify}
@@ -17,7 +16,6 @@ const Header = () => {
           </span>
         </Link>
 
-      {/* User Section */}
       <div className="flex items-center gap-4">
         <UserButton
           afterSignOutUrl="/"

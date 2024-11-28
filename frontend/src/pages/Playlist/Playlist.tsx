@@ -43,7 +43,6 @@ export const Playlist = () => {
       const token = await getToken();
       setLoading(true);
       if (id && token) {
-        console.log("here");
         const res = await fetchSinglePlaylist(id, token);
         dispatch(setSinglePlaylist(res));
       }

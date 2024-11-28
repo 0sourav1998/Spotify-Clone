@@ -37,7 +37,6 @@ export const statController = async (req, res) => {
       uniqueArtistCount: artistCount
     });
   } catch (error) {
-    console.error("Error fetching stats:", error);
     return res.status(500).json({
       success: false,
       message: "Failed to fetch stats",

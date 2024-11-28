@@ -20,7 +20,6 @@ export const getAllMessages = async(id:string,token : string | null)=>{
                 Authorization : `Bearer ${token}`
             }
         })
-        console.log(res)
         if(res && res.data.success){
             result = res.data.messages
         }

@@ -19,7 +19,6 @@ export const signInOrSignUp = async (body: signInOrSignUpType) => {
       data: body,
     });
     if (res) {
-      console.log("res",res)
       if(res.data.success){
         toast({
           title : "Logged In Successfully" ,
