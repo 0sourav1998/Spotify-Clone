@@ -27,7 +27,8 @@ export default function App() {
 
   useEffect(() => {
     if (user) {
-      const socketConnection = io("https://localhost:4000");
+      const baseUrl = import.meta.env.MODE === "development" ? "http://localhost:4000" : "/"
+      const socketConnection = io(baseUrl);
 
       socketConnection.on("connect", () => {
         socketConnection.emit("user_connected", user.id);

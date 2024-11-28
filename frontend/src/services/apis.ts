@@ -1,4 +1,4 @@
-const BASE_URL : string = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL : string = import.meta.env.MODE === "development" ? "http://localhost:4000/api/v1" : "/api/v1";
 
 export const authEndpoints = {
     SIGN_IN_OUT : `${BASE_URL}/auth/auth-user`
