@@ -14,10 +14,12 @@ import songRoute from "./routes/song.route.js";
 import userRoute from "./routes/user.route.js";
 import messageRoute from "./routes/message.route.js";
 import playlistRoute from "./routes/playlist.model.js"
-
+import path from "path"
 import cors from "cors";
 import { initializeServer } from "./socket/socket.js";
 import http from "http"
+
+const __dirname = path.resolve();
 
 app.use(cors({
   origin: "*" ,
@@ -53,6 +55,13 @@ app.use("/api/v1/song", songRoute);
 app.use("/api/v1/stat", statRoute);
 app.use("/api/v1/message",messageRoute);
 app.use("/api/v1/playlist",playlistRoute)
+
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "../frontend/dist")));
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
+	});
+}
 
 
 httpServer.listen(PORT, () => {

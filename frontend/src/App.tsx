@@ -27,7 +27,7 @@ export default function App() {
 
   useEffect(() => {
     if (user) {
-      const socketConnection = io("http://localhost:4000");
+      const socketConnection = io("https://localhost:4000");
 
       socketConnection.on("connect", () => {
         socketConnection.emit("user_connected", user.id);
