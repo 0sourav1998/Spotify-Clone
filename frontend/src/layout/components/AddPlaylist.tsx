@@ -10,11 +10,13 @@ import {
 import { Loader, Plus } from "lucide-react";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { createPlaylist } from "@/services/operations/Playlist/Playlist";
+import { useNavigate } from "react-router-dom";
 
 const AddPlaylist = () => {
   const imageRef = useRef<HTMLInputElement | null>(null);
   const { user } = useUser();
   const { getToken } = useAuth();
+  const navigate = useNavigate();
   const [playlist, setPlaylist] = useState({
     title: "",
     image: null,
@@ -43,10 +45,9 @@ const AddPlaylist = () => {
       formData.append("imageUrl", playlist.image);
 
       const result = await createPlaylist(formData, token as string);
-      if (result) {
-        setPlaylist({ title: "", image: null });
-        setOpen(false);
-      }
+      setPlaylist({ title: "", image: null });
+      navigate(`/playlist/${result._id}`)
+      setOpen(false);
     } catch (error) {
       console.error("Error creating playlist:", error);
     } finally {
@@ -55,7 +56,7 @@ const AddPlaylist = () => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(state) => setOpen(state)}>
       <DialogTrigger asChild>
         <Button className="cursor-pointer hover:bg-gray-800 transition-all duration-300 rounded-md p-2 shadow-md hover:shadow-lg">
           <Plus className="text-white" />

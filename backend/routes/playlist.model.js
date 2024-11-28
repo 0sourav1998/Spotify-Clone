@@ -9,7 +9,7 @@ app.use(isLoggedIn);
 router.get("/all",getAllPlaylist)
 router.post("/single", fetchSinglePlaylist);
 router.post("/createPlaylist", createPlaylist);
-router.delete("/playlist/:id", deletePlaylist);
+router.delete("/delete", deletePlaylist);
 router.post("/addOrRemove",isLoggedIn,addOrRemoveSong);
 
 export default router;

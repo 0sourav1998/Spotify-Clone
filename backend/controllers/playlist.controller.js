@@ -34,7 +34,7 @@ export const createPlaylist = async (req, res) => {
       imageUrl: cloudinaryResponse.secure_url,
     });
 
-    await User.findByIdAndUpdate(user.__id, {
+    await User.findByIdAndUpdate(user._id, {
       $push: { playlists: newPlaylist._id },
     });
 
@@ -54,7 +54,8 @@ export const createPlaylist = async (req, res) => {
 
 export const deletePlaylist = async (req, res) => {
   try {
-    const { playlistId } = req.params;
+    console.log("here")
+    const { playlistId } = req.body;
     const userId = req.auth.userId;
     if (!playlistId || !userId) {
       return res.status(400).json({
@@ -63,13 +64,14 @@ export const deletePlaylist = async (req, res) => {
       });
     }
     const deletedPlaylist = await Playlist.findByIdAndDelete(playlistId);
-    await User.findByIdAndUpdate(userId, { $pull: { playlists: playlistId } });
+    const user = await User.findOneAndUpdate({clerkId : userId},{$pull : {playlists:playlistId}});
     return res.status(200).json({
       success: true,
       message: "Playlist Deleted Successfully",
       deletedPlaylist,
     });
   } catch (error) {
+    console.log(error.message)
     return res.status(400).json({
       success: false,
       message: "Something Went Wrong While Deleting Playlist",
@@ -81,6 +83,9 @@ export const getAllPlaylist = async (req, res) => {
   try {
     const userId = req.auth.userId;
     const user = await User.findOne({ clerkId: userId });
+    if(!user){
+      return;
+    }
     const allPlaylists = await Playlist.find({ owner: user._id }).populate("songs");
     return res.status(200).json({
       success: true,

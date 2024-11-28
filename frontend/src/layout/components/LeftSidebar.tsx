@@ -2,25 +2,30 @@ import PlaylistSkeleton from "@/components/skeletons/PlaylistSkeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { setAlbums, setAllPlaylists } from "@/redux/slice/Music/Music";
 import { fetchAllAlbums } from "@/services/operations/Music/Music";
-import { SignedIn, useAuth } from "@clerk/clerk-react";
+import { SignedIn, useAuth, useUser } from "@clerk/clerk-react";
 import {
   Album,
-  ArrowBigDown,
   ArrowDown,
   HomeIcon,
   Library,
+  Loader,
   MessageCircle,
-  Plus,
+  Trash2,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { RootState } from "@/main";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+1;
 import { setSwitchToChat } from "@/redux/slice/chat/chat";
 import { motion } from "framer-motion";
 import AddPlaylist from "./AddPlaylist";
-import { allPlayLists } from "@/services/operations/Playlist/Playlist";
+import {
+  getAllPlayLists,
+  deletePlaylist,
+} from "@/services/operations/Playlist/Playlist";
+
+import toast from "react-hot-toast";
 
 const LeftSidebar = () => {
   const dispatch = useDispatch();
@@ -32,6 +37,29 @@ const LeftSidebar = () => {
   const [openPlaylist, setOpenPlaylist] = useState(false);
   const isLoading = false;
   const { getToken } = useAuth();
+  const [loading, setLoading] = useState<Record<string, boolean>>({});
+  const {user,isSignedIn} = useUser();
+
+  const deletePlaylists = async (id: string) => {
+    try {
+      setLoading((prev) => ({ ...prev, [id]: true }));
+      const token = await getToken();
+      const result = await deletePlaylist(id, token as string);
+      if (result) {
+        console.log(result);
+        const updatedPlaylists = allPlaylists.filter((playlist) => {
+          playlist._id !== result._id;
+        });
+        dispatch(setAllPlaylists(updatedPlaylists));
+        toast.success("Playlist Deleted");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading((prev) => ({ ...prev, [id]: false }));
+    }
+  };
 
   const fetchAlbums = async () => {
     const albums = await fetchAllAlbums();
@@ -40,7 +68,7 @@ const LeftSidebar = () => {
 
   const fetchPlaylists = async () => {
     const token = await getToken();
-    const playlists = await allPlayLists(token as string);
+    const playlists = await getAllPlayLists(token as string);
     dispatch(setAllPlaylists(playlists));
   };
 
@@ -95,59 +123,78 @@ const LeftSidebar = () => {
         </div>
       </div>
 
-      <div className="max-h-[70%] bg-zinc-800 rounded-md md:p-4 p-2 gap-2 flex flex-col">
-        <div className="flex flex-row justify-between items-center border-b border-b-slate-600 p-2">
-          <div className="flex gap-2 items-center">
-            <Library className="size-5 mx-auto sm:mx-0" />
-            <p className="font-bold hidden sm:flex">Playlists</p>
+      <div className={`${(isSignedIn && user) ? "max-h-[70%] bg-zinc-800 rounded-md md:p-4 p-2 gap-2 flex flex-col" : "min-h-[90%] bg-zinc-800 rounded-md md:p-4 p-2 gap-2 flex flex-col"}`}>
+        {user && isSignedIn && (
+          <div className="flex flex-row justify-between items-center border-b border-b-slate-600 p-2">
+            <div className="flex gap-2 items-center">
+              <Library className="size-5 mx-auto sm:mx-0" />
+              <p className="font-bold hidden sm:flex">Playlists</p>
+            </div>
+            <AddPlaylist />
           </div>
-          <AddPlaylist />
-        </div>
+        )}
         <ScrollArea className="h-[calc(100vh-300px)]">
-          <ScrollArea className="cursor-pointer rounded-md shadow-md p-1 mb-2 bg-gradient-to-r from-blue-950 to-green-900 transition-all duration-300 max-h-72">
-            <div
-              className="flex justify-between items-center rounded-md hover:bg-gray-800 transition-all duration-200"
-              onClick={() => setOpenPlaylist((prev) => !prev)}
-            >
-              <p className="text-left text-gray-200 md:text-sm text-xs font-semibold md:p-2 p-1">
-                My Playlists
-              </p>
-              <ArrowDown
-                className={`transition-transform ${
-                  openPlaylist ? "rotate-180" : "rotate-0"
-                } hidden md:flex`}
-              />
-            </div>
+          {user && isSignedIn  && (
+            <ScrollArea className="cursor-pointer rounded-md shadow-md p-1 mb-2 bg-gradient-to-r from-blue-950 to-green-900 transition-all duration-300 max-h-72">
+              <div
+                className="flex justify-between items-center rounded-md hover:bg-gray-800 transition-all duration-200"
+                onClick={() => setOpenPlaylist((prev) => !prev)}
+              >
+                <p className="text-left text-gray-200 md:text-sm text-xs font-semibold md:p-2 p-1">
+                  My Playlists
+                </p>
+                <ArrowDown
+                  className={`transition-transform ${
+                    openPlaylist ? "rotate-180" : "rotate-0"
+                  } hidden md:flex`}
+                />
+              </div>
 
-            <div
-              className={`${
-                openPlaylist ? "flex flex-col gap-2" : "hidden"
-              } w-[90%] mx-auto mt-3 mb-3`}
-            >
-              {allPlaylists?.length !== 0 ? (
-                allPlaylists?.map((playlist) => (
-                  <div
-                  onClick={()=>navigate(`/playlist/${playlist._id}`)}
-                    key={playlist._id}
-                    className="flex items-center gap-4 bg-blue-950 shadow-md shadow-blue-800 p-2 rounded-md hover:shadow-md hover:bg-gray-950 transition-all duration-200"
-                  >
-                    <div className="w-6 h-6 bg-gray-600 rounded-full  hidden md:flex justify-center items-center text-gray-400">
-                      <img
-                        src={playlist.imageUrl || "/placeholder.png"}
-                        alt="Playlist"
-                        className="w-full h-full object-cover rounded-full"
-                      />
+              <div
+                className={`${
+                  openPlaylist ? "flex flex-col gap-2" : "hidden"
+                } w-[90%] mx-auto mt-3 mb-3`}
+              >
+                {allPlaylists?.length !== 0 ? (
+                  allPlaylists?.map((playlist) => (
+                    <div
+                      onClick={() => navigate(`/playlist/${playlist._id}`)}
+                      key={playlist._id}
+                      className="flex items-center justify-between gap-4 bg-blue-950 shadow-md shadow-blue-800 p-2 rounded-md hover:shadow-md hover:bg-gray-950 transition-all duration-200"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="w-6 h-6 bg-gray-600 rounded-full  hidden md:flex flex-row justify-center items-center text-gray-400">
+                          <img
+                            src={playlist.imageUrl || "/placeholder.png"}
+                            alt="Playlist"
+                            className="w-full h-full object-cover rounded-full"
+                          />
+                        </div>
+                        <p className="text-gray-200 text-sm font-medium truncate">
+                          {playlist.title}
+                        </p>
+                      </div>
+                      <div
+                        className="hover:bg-red-600 p-1 rounded-full transition-all duration-200"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deletePlaylists(playlist._id);
+                        }}
+                      >
+                        {loading[playlist._id] ? (
+                          <Loader className="animate-spin text-green-600" />
+                        ) : (
+                          <Trash2 size={16} />
+                        )}
+                      </div>
                     </div>
-                    <p className="text-gray-200 text-sm font-medium truncate">
-                      {playlist.title}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <p className="text-gray-400 text-center">No Playlist Found</p>
-              )}
-            </div>
-          </ScrollArea>
+                  ))
+                ) : (
+                  <p className="text-gray-400 text-center">No Playlist Found</p>
+                )}
+              </div>
+            </ScrollArea>
+          )}
 
           <div className="space-y-2">
             {isLoading ? (

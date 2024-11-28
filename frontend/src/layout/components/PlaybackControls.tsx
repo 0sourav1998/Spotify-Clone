@@ -90,7 +90,7 @@ const PlaybackControls = () => {
   };
 
   return (
-    <footer className="flex sm:flex-row flex-col sm:items-center justify-between w-full bg-zinc-950 shadow-md md:p-2 p-3 sticky bottom-0 z-10">
+    <footer className="flex sm:flex-row flex-col sm:items-center justify-between w-full bg-zinc-950 shadow-md md:p-2 p-2 sticky bottom-0 z-10">
       <div className="p-1 flex items-center justify-center shadow-md shadow-white mb-4 sm:mb-0 sm:shadow-none">
         {currentSong && (
           <div className="flex flex-row items-center p-2 gap-4 min-w-[60%]">

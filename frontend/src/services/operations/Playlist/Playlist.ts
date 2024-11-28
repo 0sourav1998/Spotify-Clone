@@ -1,8 +1,9 @@
 import apiConnector from "@/services/apiConnector";
 import { playlistEndpoints } from "@/services/apis"
+import { Playlist } from "@/types";
 import toast from "react-hot-toast";
 
-const {CREATE_PLAYLIST,GET_ALL,ADD_REMOVE,GET_SINGLE} = playlistEndpoints ;
+const {CREATE_PLAYLIST,GET_ALL,ADD_REMOVE,GET_SINGLE,DELETE_PLAYLIST} = playlistEndpoints ;
 
 
 interface bodyType {
@@ -11,6 +12,7 @@ interface bodyType {
 }
 
 export const createPlaylist = async(body : bodyType ,token : string)=>{
+    let result ;
     try {
         const response = await apiConnector({
             method : "POST",
@@ -21,15 +23,16 @@ export const createPlaylist = async(body : bodyType ,token : string)=>{
             }
         })
         if(response && response.data.success){
-            console.log(response)
+            result = response.data.newPlaylist
             toast.success(response.data.message)
         }
     } catch (error:any) {
         toast.error(error.data?.message)
     }
+    return result ;
 }
 
-export const allPlayLists = async(token : string)=>{
+export const getAllPlayLists = async(token : string)=>{
     let result ;
     try {
         const response = await apiConnector({
@@ -90,3 +93,23 @@ export const fetchSinglePlaylist = async(id : string ,token : string)=>{
     return result ;
 }
 
+
+export const deletePlaylist = async(id : string ,token : string) : Promise<Playlist> =>{
+    let result ;
+    try {
+        const res = await apiConnector({
+            method : "DELETE",
+            url : DELETE_PLAYLIST ,
+            data : {playlistId:id},
+            headers : {
+                Authorization : `Bearer ${token}`
+            }
+        });
+        if(res && res.data.success){
+            result = res.data.deletedPlaylist
+        }
+    } catch (error : any) {
+        console.log(error.message)
+    }
+    return result ;
+}

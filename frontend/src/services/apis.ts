@@ -36,7 +36,7 @@ export const messageEndpoints = {
 
 export const playlistEndpoints = {
     CREATE_PLAYLIST : `${BASE_URL}/playlist/createPlaylist`,
-    DELETE_PLAYLIST : `${BASE_URL}/playlist/:id`,
+    DELETE_PLAYLIST : `${BASE_URL}/playlist/delete`,
     GET_SINGLE : `${BASE_URL}/playlist/single`,
     GET_ALL : `${BASE_URL}/playlist/all`,
     ADD_REMOVE : `${BASE_URL}/playlist/addOrRemove`
