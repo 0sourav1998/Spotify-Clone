@@ -17,7 +17,10 @@ const AddPlaylist = () => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const navigate = useNavigate();
-  const [playlist, setPlaylist] = useState({
+  const [playlist, setPlaylist] = useState<{
+    title: string;
+    image: File | null;
+  }>({
     title: "",
     image: null,
   });
@@ -46,7 +49,7 @@ const AddPlaylist = () => {
 
       const result = await createPlaylist(formData, token as string);
       setPlaylist({ title: "", image: null });
-      navigate(`/playlist/${result._id}`)
+      navigate(`/playlist/${result._id}`);
       setOpen(false);
     } catch (error) {
       console.error("Error creating playlist:", error);

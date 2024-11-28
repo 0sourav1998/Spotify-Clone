@@ -1,9 +1,10 @@
-import TopBar from "@/components/TopBar";
+
 import FeaturedSongs from "./FeaturedSongs";
 import MadeForYou from "./MadeForYou";
 import TrendingSongs from "./TrendingSongs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import TopBar from "../../components/TopBar"
 
 const Homepage = () => {
   return (

@@ -53,7 +53,7 @@ const MessageContainer = () => {
                   <img
                     src={msg.senderId.imageUrl}
                     className="rounded-full md:w-12 md:h-12 w-8 h-8 object-cover"
-                    alt={msg.senderId.name}
+                    alt="message-image"
                   />
                 </div>
                 <div className="flex flex-col gap-1 max-w-full w-auto">

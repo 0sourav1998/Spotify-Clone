@@ -11,7 +11,7 @@ interface bodyType {
     playlistId ?: string
 }
 
-export const createPlaylist = async(body : bodyType ,token : string)=>{
+export const createPlaylist = async(body : FormData ,token : string)=>{
     let result ;
     try {
         const response = await apiConnector({
