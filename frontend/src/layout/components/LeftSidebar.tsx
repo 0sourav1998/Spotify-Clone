@@ -72,9 +72,6 @@ const LeftSidebar = () => {
     dispatch(setAllPlaylists(playlists));
   };
 
-  const handleSwitchToChat = () => {
-    dispatch(setSwitchToChat(true));
-  };
 
   useEffect(() => {
     fetchAlbums();

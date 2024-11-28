@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserIsAdmin } from "@/redux/slice/User/User";
 import { RootState } from "@/main";
 
-const Topbar = () => {
+const TopBar = () => {
   const { getToken } = useAuth();
   const dispatch = useDispatch();
   const { user } = useUser();
@@ -48,7 +48,7 @@ const Topbar = () => {
             to="/admin"
             className="flex gap-2 items-center justify-center bg-gray-900 hover:bg-gray-950 transition-all duration-300 rounded-md border-gray-200 md:p-2 p-2"
           >
-            <LayoutDashboardIcon className="w-5 h-5 mr-2 text-white hidden md:flex" />
+            <LayoutDashboardIcon className="md:w-5 md:h-5 w-4 h-4 mr-2 text-white hidden md:flex" />
             <p className="text-gray-400 md:text-lg text-[8px]">Admin Dashboard</p>
           </Link>
         )}
@@ -63,4 +63,4 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+export default TopBar;

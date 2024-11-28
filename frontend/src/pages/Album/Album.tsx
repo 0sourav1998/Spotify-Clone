@@ -228,7 +228,7 @@ const Album = () => {
                                     allPlaylists
                                       .filter(
                                         (playlist) =>
-                                          !playlist?.songs.some(
+                                          !playlist?.songs?.some(
                                             (s) => s._id === song._id
                                           )
                                       )

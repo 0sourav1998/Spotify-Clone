@@ -1,4 +1,4 @@
-import Topbar from "@/components/Topbar";
+import TopBar from "@/components/TopBar";
 import FeaturedSongs from "./FeaturedSongs";
 import MadeForYou from "./MadeForYou";
 import TrendingSongs from "./TrendingSongs";
@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 const Homepage = () => {
   return (
     <div className="h-screen flex flex-col">
-      <Topbar />
+      <TopBar />
       <ScrollArea className="flex-1 w-full mx-auto mt-1 bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-md overflow-y-auto md:p-4 p-1">
         <FeaturedSongs />
         <Separator className="w-full my-4 h-px bg-gray-500" />

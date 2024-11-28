@@ -17,10 +17,9 @@ import {
   Pause,
   Play,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { gsap } from 'gsap';
 
 export const Playlist = () => {
   const { id } = useParams();
@@ -33,12 +32,6 @@ export const Playlist = () => {
   const { currentSong, isPlaying } = useSelector(
     (state: RootState) => state.player
   );
-
-  const songs = ['Song 1', 'Song 2', 'Song 3'];
-
-  useEffect(() => {
-    gsap.fromTo('.song', { y: '100%' }, { y: '0%', stagger: 0.5, ease: 'power2.out' });
-  }, [])
 
   const handlePlaySong = (index: number) => {
     if (!singleAlbum || !singleAlbum.songs) return;
@@ -157,7 +150,7 @@ export const Playlist = () => {
                     <Clock className="size-4 inline-block" />
                   </div>
                 </div>
-                <ScrollArea className="border border-slate-950 h-[178px] overflow-auto">
+                <ScrollArea className="border border-slate-950 h-[178px] sm:h-[210px] md:[178px] overflow-auto">
                   {singlePlaylist?.songs?.length === 0 ? (
                     <p className="text-gray-200 text-xl w-full p-3 text-center mt-4">
                       No Songs Found in this Album
@@ -198,7 +191,7 @@ export const Playlist = () => {
                             </span>
                             <button
                               onClick={(event) => {handleRemovePlaylist(song._id);event.stopPropagation()}}
-                              className="absolute md:p-2 p-1 md:-top-4 md:-left-8 right-3 bottom-0.5  text-gray-700 hover:bg-red-500 to-blue-950 rounded-full transition-all duration-200"
+                              className="absolute w-fit h-fit rounded-full md:p-2 p-1 md:-top-4 md:-left-8 right-3 bottom-0.5  text-gray-700 hover:bg-red-500 to-blue-950 transition-all duration-200"
                             >
                               <BookmarkMinus size={16}/>
                             </button>
