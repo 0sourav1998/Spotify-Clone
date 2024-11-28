@@ -10,24 +10,22 @@ import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { useDispatch } from "react-redux";
 import { setSocket } from "./redux/slice/chat/socket";
-import {
-  updateOnlineUsers,
-} from "./redux/slice/chat/chat";
+import { updateOnlineUsers } from "./redux/slice/chat/chat";
 import { resetPlayState } from "./redux/slice/Music/PlayerStore";
-import {Playlist} from "./pages/Playlist/Playlist";
+import { Playlist } from "./pages/Playlist/Playlist";
 
 export default function App() {
-  const { user  } = useUser();
+  const { user } = useUser();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(resetPlayState());
-  }, [dispatch])
-
+  }, [dispatch]);
 
   useEffect(() => {
     if (user) {
-      const baseUrl = import.meta.env.MODE === "development" ? "http://localhost:4000" : "/"
+      const baseUrl =
+        import.meta.env.MODE === "development" ? "http://localhost:4000" : "/";
       const socketConnection = io(baseUrl);
 
       socketConnection.on("connect", () => {
@@ -41,27 +39,27 @@ export default function App() {
     }
   }, [user]);
 
-
-  
   return (
-    <Routes>
-      <Route
-        path="/sso-callback"
-        element={
-          <AuthenticateWithRedirectCallback
-            signUpForceRedirectUrl={"/auth-callback"}
-          />
-        }
-      />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/auth-callback" element={<AuthCallbackPage />} />
-      <Route path="/" element={<MainComponent />}>
-        <Route index element={<Homepage />} />
-        <Route path="/chat/:id" element={<ChatPage />} />
-        <Route path="/album/:id" element={<Album />} />
-        <Route path="/playlist/:id" element={<Playlist/>}/>
-      </Route>
-      <Route />
-    </Routes>
+    <div className="min-h-screen bg-black">
+      <Routes>
+        <Route
+          path="/sso-callback"
+          element={
+            <AuthenticateWithRedirectCallback
+              signUpForceRedirectUrl={"/auth-callback"}
+            />
+          }
+        />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/auth-callback" element={<AuthCallbackPage />} />
+        <Route path="/" element={<MainComponent />}>
+          <Route index element={<Homepage />} />
+          <Route path="/chat/:id" element={<ChatPage />} />
+          <Route path="/album/:id" element={<Album />} />
+          <Route path="/playlist/:id" element={<Playlist />} />
+        </Route>
+        <Route />
+      </Routes>
+    </div>
   );
 }

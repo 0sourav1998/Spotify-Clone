@@ -82,7 +82,7 @@ const LeftSidebar = () => {
 
   return (
     <div
-      className={`h-full ${
+      className={`h-[85vh] ${
         switchToChat ? "hidden" : "flex"
       } md:flex flex-col gap-2 text-white`}
     >
@@ -119,7 +119,7 @@ const LeftSidebar = () => {
         </div>
       </div>
 
-      <div className={`${(isSignedIn && user) ? "max-h-[70%] bg-zinc-800 rounded-md md:p-4 p-2 gap-2 flex flex-col" : "min-h-[90%] bg-zinc-800 rounded-md md:p-4 p-2 gap-2 flex flex-col"}`}>
+      <div className={`${(isSignedIn && user) ? "h-full bg-zinc-800 rounded-md md:p-4 p-2 gap-2 flex flex-col" : "h-full bg-zinc-800 rounded-md md:p-2 p-2 gap-2 flex flex-col"}`}>
         {user && isSignedIn && (
           <div className="flex flex-row justify-between items-center border-b border-b-slate-600 p-2">
             <div className="flex gap-2 items-center">
@@ -133,7 +133,7 @@ const LeftSidebar = () => {
           {user && isSignedIn  && (
             <ScrollArea className="cursor-pointer rounded-md shadow-md p-1 mb-2 bg-gradient-to-r from-blue-950 to-green-900 transition-all duration-300 max-h-72">
               <div
-                className="flex justify-between items-center rounded-md hover:bg-gray-800 transition-all duration-200"
+                className="flex h-full justify-between items-center rounded-md hover:bg-gray-800 transition-all duration-200"
                 onClick={() => setOpenPlaylist((prev) => !prev)}
               >
                 <p className="text-left text-gray-200 md:text-sm text-xs font-semibold md:p-2 p-1">
@@ -192,7 +192,7 @@ const LeftSidebar = () => {
             </ScrollArea>
           )}
 
-          <div className="space-y-2">
+          <div className="space-y-2 h-fit">
             {isLoading ? (
               <PlaylistSkeleton />
             ) : albums?.length === 0 ? (
@@ -214,7 +214,7 @@ const LeftSidebar = () => {
                   >
                     <img
                       src={album?.imageUrl}
-                      className="xl:size-16 size-full rounded-md object-cover aspect-square xl:object-cover xl:aspect-auto"
+                      className="xl:size-16 size-full rounded-md object-fit aspect-square"
                     />
                     <div className="hidden md:flex flex-col xl:gap-2 gap-1">
                       <p className="font-normal xl:font-bold">

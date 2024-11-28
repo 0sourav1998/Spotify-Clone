@@ -23,7 +23,7 @@ const RightSidebar = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state: RootState) => state.user);
   const { getToken } = useAuth();
-  const { user } = useUser();
+  const { user, isSignedIn } = useUser();
   const location = useLocation();
   const { onlineUsers, selectedUser, userActivities } = useSelector(
     (state: RootState) => state.chat
@@ -66,7 +66,9 @@ const RightSidebar = () => {
   };
 
   useEffect(() => {
-    const socket = io("http://localhost:4000");
+    const baseUrl =
+      import.meta.env.MODE === "development" ? "http://localhost:4000" : "/";
+    const socket = io(baseUrl);
 
     if (socket) {
       socket.on("updated_activity", (updateActivities) => {
@@ -93,7 +95,7 @@ const RightSidebar = () => {
 
   return (
     <div
-      className={`h-screen ${
+      className={`h-[85vh] ${
         switchToChat ? "flex" : "hidden"
       } md:flex bg-zinc-900 rounded-lg shadow-lg flex-col lg:p-2 p-0 md:space-y-4 space-y-1`}
     >
@@ -136,64 +138,66 @@ const RightSidebar = () => {
 
       {!user && <LoginPrompt />}
 
-      <ScrollArea className="flex-1 mt-2">
-        <div className="space-y-2">
-          {filteredUser?.length > 0 ? (
-            filteredUser.map((user) => (
-              <Link
-                to={`/chat/${user.clerkId}`}
-                className={`flex md:flex-row flex-col items-center md:gap-4 gap-2 md:p-4 p-2 ${
-                  selectedUser?.clerkId === user.clerkId
-                    ? "bg-slate-950 text-gray-400"
-                    : "bg-zinc-800 hover:bg-zinc-700"
-                } rounded-lg transition-all duration-200 cursor-pointer`}
-                key={user._id}
-              >
-                <div className="relative">
-                  <Avatar className="md:w-12 md:h-12 w-6 h-6">
-                    <AvatarImage src={user?.imageUrl} alt={user.name} />
-                    <AvatarFallback>{user.name[0]}</AvatarFallback>
-                  </Avatar>
-                  <div
-                    className={`${
-                      isOnline(user)
-                        ? "bg-blue-900 absolute rounded-full bottom-0.5 md:bottom-1 -right-0.5 sm:-right-1 md:size-3 size-1.5 sm:size-2"
-                        : "bg-zinc-600 absolute rounded-full bottom-0.5 -right-0.5 md:bottom-1 sm:-right-1 md:size-3 size-1.5 sm:size-2"
-                    }`}
-                  ></div>
-                </div>
-
-                <div className="flex flex-col flex-1 text-gray-300">
-                  <span className="md:text-sm text-[12px] md:font-medium font-normal text-white">
-                    {user?.name.split(" ")[1] === "null"
-                      ? user?.name.split(" ")[0]
-                      : user.name}
-                  </span>
-                  <div className="flex flex-col mt-1">
-                    {isListening(user) !== "Idle" ? (
-                      <>
-                        <span className="md:text-xs text-[10px] text-blue-400 font-medium truncate">
-                          {isListening(user)}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="md:text-xs text-[10px] text-zinc-500">
-                        Idle
-                      </span>
-                    )}
+      {user && isSignedIn && (
+        <ScrollArea className="flex-1 mt-2">
+          <div className="space-y-2">
+            {filteredUser?.length > 0 ? (
+              filteredUser.map((user) => (
+                <Link
+                  to={`/chat/${user.clerkId}`}
+                  className={`flex md:flex-row flex-col items-center md:gap-4 gap-2 md:p-4 p-2 ${
+                    selectedUser?.clerkId === user.clerkId
+                      ? "bg-slate-950 text-gray-400"
+                      : "bg-zinc-800 hover:bg-zinc-700"
+                  } rounded-lg transition-all duration-200 cursor-pointer`}
+                  key={user._id}
+                >
+                  <div className="relative">
+                    <Avatar className="md:w-12 md:h-12 w-6 h-6">
+                      <AvatarImage src={user?.imageUrl} alt={user.name} />
+                      <AvatarFallback>{user.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <div
+                      className={`${
+                        isOnline(user)
+                          ? "bg-blue-900 absolute rounded-full bottom-0.5 md:bottom-1 -right-0.5 sm:-right-1 md:size-3 size-1.5 sm:size-2"
+                          : "bg-zinc-600 absolute rounded-full bottom-0.5 -right-0.5 md:bottom-1 sm:-right-1 md:size-3 size-1.5 sm:size-2"
+                      }`}
+                    ></div>
                   </div>
-                </div>
 
-                {isListening(user) !== "Idle" && (
-                  <Music className="text-emerald-500 w-5 h-5 animate-pulse" />
-                )}
-              </Link>
-            ))
-          ) : (
-            <div className="text-center text-zinc-500">No users found</div>
-          )}
-        </div>
-      </ScrollArea>
+                  <div className="flex flex-col flex-1 text-gray-300">
+                    <span className="md:text-sm text-[12px] md:font-medium font-normal text-white">
+                      {user?.name.split(" ")[1] === "null"
+                        ? user?.name.split(" ")[0]
+                        : user.name}
+                    </span>
+                    <div className="flex flex-col mt-1">
+                      {isListening(user) !== "Idle" ? (
+                        <>
+                          <span className="md:text-xs text-[10px] text-blue-400 font-medium truncate">
+                            {isListening(user)}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="md:text-xs text-[10px] text-zinc-500">
+                          Idle
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {isListening(user) !== "Idle" && (
+                    <Music className="text-emerald-500 w-5 h-5 animate-pulse" />
+                  )}
+                </Link>
+              ))
+            ) : (
+              <div className="text-center text-zinc-500">No users found</div>
+            )}
+          </div>
+        </ScrollArea>
+      )}
     </div>
   );
 };

@@ -36,7 +36,7 @@ const MadeForYou = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-6 md:min-h-[25%] sm:pb-36 md:pb-36 pb-56">
+    <div className="flex flex-col gap-4 p-6 md:min-h-[25%]">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-gray-50 font-bold md:text-3xl text-xl">
           Made For You

@@ -7,3 +7,32 @@
 body{
     font-family: "Poppins", serif;
 }
+
+/* Styling the whole scrollbar */
+::-webkit-scrollbar {
+    width: 12px;        /* Width of vertical scrollbar */
+    height: 12px;       /* Height of horizontal scrollbar */
+  }
+  
+  /* Styling the scrollbar track (the part the thumb slides within) */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light grey background for the track */
+    border-radius: 10px;  /* Rounded corners */
+  }
+  
+  /* Styling the scrollbar thumb (the draggable part) */
+  ::-webkit-scrollbar-thumb {
+    background: #888;     /* Darker grey for the thumb */
+    border-radius: 10px;  /* Rounded corners */
+  }
+  
+  /* Adding hover effect for the thumb */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;     /* Even darker grey on hover */
+  }
+  
+  /* Styling the scrollbar corner (when both horizontal and vertical bars are visible) */
+  ::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+  }
+  

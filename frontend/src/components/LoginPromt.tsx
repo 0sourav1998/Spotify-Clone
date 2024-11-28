@@ -1,7 +1,7 @@
 import { HeadphonesIcon } from 'lucide-react';
 
 export const LoginPrompt = () => (
-	<div className='h-full flex flex-col items-center justify-center p-6 text-center space-y-4'>
+	<div className='h-[70%] flex flex-col items-center justify-center p-6 text-center space-y-4'>
 		<div className='relative'>
 			<div
 				className='absolute -inset-1 bg-gradient-to-r from-emerald-500 to-sky-500 rounded-full blur-lg

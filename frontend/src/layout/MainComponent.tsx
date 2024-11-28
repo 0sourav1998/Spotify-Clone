@@ -16,7 +16,6 @@ const MainComponent = () => {
   const { switchToChat } = useSelector((state: RootState) => state.chat);
   const [isMobile, setIsMobile] = useState(false);
 
-  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1024);
@@ -27,10 +26,10 @@ const MainComponent = () => {
   }, []);
 
   return (
-    <div className="h-screen bg-black overflow-hidden">
+    <div className="flex flex-col" style={{ height: '85vh' }}>
       <ResizablePanelGroup
         direction="horizontal"
-        className="h-full overflow-hidden flex-1 flex md:p-2 p-1"
+        className="max-h-[85vh] overflow-hidden flex-1 flex md:p-2 p-1"
       >
         <AudioPlayer />
         {isMobile && switchToChat ? (

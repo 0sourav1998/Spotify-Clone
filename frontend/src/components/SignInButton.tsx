@@ -25,7 +25,7 @@ export const SignInButton = () => {
       className="w-full h-11 border-zinc-200 text-gray-200 shadow-gray-50 bg-zinc-900 hover:bg-zinc-950 transition-all duration-300"
     >
       
-     <img src={Google} className='size-7'/> Continue With Google
+     <img src={Google} className='size-7'/> <span className='hidden md:flex'>Continue With Google</span>
     </Button>
   );
 };

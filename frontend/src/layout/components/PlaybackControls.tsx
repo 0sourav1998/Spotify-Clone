@@ -44,7 +44,6 @@ const PlaybackControls = () => {
 
   let audioRef = useRef<HTMLAudioElement | null>(null);
 
-
   const handleVolume = (value: number | number[]) => {
     if (audioRef.current && typeof value === "number") {
       audioRef.current.volume = value / 100;
@@ -83,20 +82,20 @@ const PlaybackControls = () => {
   const repeatSong = () => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
-      dispatch(setIsPlaying())
+      dispatch(setIsPlaying());
       audioRef.current.play();
     }
   };
 
   return (
-    <footer className="flex sm:flex-row flex-col sm:items-center justify-between w-full bg-zinc-950 shadow-md md:p-2 p-2 sticky bottom-0 z-10">
+    <footer className="flex sm:flex-row flex-col sm:items-center justify-between w-full bg-zinc-950 shadow-md md:p-2 p-2 mb-4 fixed bottom-0 z-10" style={{ height: '15vh' }}>
       <div className="p-1 flex items-center justify-center shadow-md shadow-white mb-4 sm:mb-0 sm:shadow-none">
         {currentSong && (
           <div className="flex flex-row items-center p-2 gap-4 min-w-[60%]">
             <img src={currentSong.imageUrl} className="md:size-12 size-10 rounded-md" />
             <div className="flex flex-col">
               <div className="text-gray-200 md:text-xl text-sm font-semibold">
-                {currentSong.title.length > 10 ? currentSong.title.substring(0,10) + "..." : currentSong.title}
+                {currentSong.title.length > 10 ? currentSong.title.substring(0, 10) + "..." : currentSong.title}
               </div>
               <p className="text-gray-500 md:text-sm text-xs">{currentSong.artist}</p>
             </div>
@@ -118,6 +117,7 @@ const PlaybackControls = () => {
           />
         </div>
       </div>
+
       <div className="flex flex-row sm:flex-col gap-4 items-center">
         <div className="flex sm:gap-4 gap-1.5 items-center">
           <Button
@@ -157,6 +157,7 @@ const PlaybackControls = () => {
             <SkipForward className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
         </div>
+
         <div className="flex items-center gap-4 w-full">
           <p className="text-xs text-zinc-400">{formatDuration(currentTime)}</p>
           <Slider
@@ -169,9 +170,10 @@ const PlaybackControls = () => {
           <p className="text-xs text-zinc-400">{formatDuration(duration)}</p>
         </div>
       </div>
+
       <div className="flex flex-col gap-2 mr-2 min-w-[10%]">
-        <div className="hidden md:flex">
-        <Button variant={"ghost"}>
+        <div className="hidden md:flex gap-2">
+          <Button variant={"ghost"}>
             <Mic2 className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
           <Button variant={"ghost"}>
@@ -181,6 +183,7 @@ const PlaybackControls = () => {
             <Laptop2 className="text-gray-200 hover:scale-105 transition-all duration-200" />
           </Button>
         </div>
+
         <div className="hidden sm:flex flex-col md:flex-row items-center gap-0.5 w-full justify-end">
           <Button variant={"ghost"}>
             <Volume className="text-gray-200 hover:scale-105 transition-all duration-200" />
