@@ -115,7 +115,7 @@ const Album = () => {
     <ScrollArea className="h-full">
       <div className="h-full rounded-md">
         <div className="absolute min-h-screen inset-0 bg-gradient-to-b from-[#5038a0] via-zinc-900/80 to-zinc-900" />
-        <div className="relative z-10">
+        <div className="relative z-10 min-h-[85vh]">
           <div className="flex flex-col sm:flex-row items-center md:gap-6 gap-4 md:p-6 p-5 md:pb-8 pb-2">
             <img
               src={singleAlbum?.imageUrl}
@@ -162,7 +162,7 @@ const Album = () => {
                 <Clock className="size-4 inline-block" />
               </div>
             </div>
-            <ScrollArea className="border border-slate-950 h-[178px] sm:h-[210px] md:[178px] overflow-auto md:mb-24">
+            <ScrollArea className="border border-slate-950 pb-16 overflow-auto md:pb-24">
               {singleAlbum?.songs?.length === 0 ? (
                 <p className="text-gray-200 text-xl w-full p-3">
                   No Songs Found in this Album

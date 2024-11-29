@@ -13,6 +13,7 @@ import { setSocket } from "./redux/slice/chat/socket";
 import { updateOnlineUsers } from "./redux/slice/chat/chat";
 import { resetPlayState } from "./redux/slice/Music/PlayerStore";
 import { Playlist } from "./pages/Playlist/Playlist";
+import NotFoundPage from "./pages/404/NotFoundPage";
 
 export default function App() {
   const { user } = useUser();
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="/chat/:id" element={<ChatPage />} />
           <Route path="/album/:id" element={<Album />} />
           <Route path="/playlist/:id" element={<Playlist />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Route>
         <Route />
       </Routes>
