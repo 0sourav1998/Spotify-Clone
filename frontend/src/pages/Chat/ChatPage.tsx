@@ -61,7 +61,7 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="text-white h-[93%] flex flex-col overflow-y-hidden relative">
+    <div className="text-white h-[85vh] flex flex-col overflow-y-hidden relative">
       <div className="flex items-center gap-4 border-b p-4">
         <img
           src={selectedUser?.imageUrl}
@@ -81,11 +81,11 @@ const ChatPage = () => {
         </div>
       </div>
 
-      <div className="h-[65vh] overflow-auto md:p-4 p-0">
+      <div className="h-[75vh] overflow-auto md:p-4 p-0">
         <MessageContainer />
       </div>
 
-      <div className="w-full md:p-4 p-0 absolute md:bottom-12 bottom-[68px] bg-gray-800 flex items-center gap-2 border-t border-zinc-700">
+      <div className="w-full flex justify-center items-center md:p-2 p-2 z-20 absolute md:bottom-6 bottom-4 bg-gray-800 gap-2 border-t border-zinc-700">
         <input
           placeholder="Enter Your Message..."
           value={message}
