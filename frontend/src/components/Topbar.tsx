@@ -47,7 +47,7 @@ const TopBar = () => {
             to="/admin"
             className="flex gap-2 items-center justify-center bg-gray-900 hover:bg-gray-950 transition-all duration-300 rounded-md border-gray-200 md:p-2 p-2"
           >
-            <LayoutDashboardIcon className="md:w-5 md:h-5 w-4 h-4 mr-2 text-white hidden md:flex" />
+            <LayoutDashboardIcon className="md:w-5 md:h-5 w-4 h-4 mr-2 text-white" />
             <p className="text-gray-400 md:text-lg text-[8px]">Admin Dashboard</p>
           </Link>
         )}

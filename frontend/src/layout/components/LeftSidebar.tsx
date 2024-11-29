@@ -129,7 +129,7 @@ const LeftSidebar = () => {
             <AddPlaylist />
           </div>
         )}
-        <ScrollArea className="h-[calc(100vh-300px)]">
+        <ScrollArea className="h-full">
           {user && isSignedIn  && (
             <ScrollArea className="cursor-pointer rounded-md shadow-md p-1 mb-2 bg-gradient-to-r from-blue-950 to-green-900 transition-all duration-300 max-h-72">
               <div
